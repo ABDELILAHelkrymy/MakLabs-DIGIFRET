@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Toast, toast } from "react-toastify";
-import Spinner from "../components/Spinner";
-import ListingItem from "../components/ListingItem";
+import Spinner from "../components/spinner/Spinner";
 
 
 const Offers = () => {
@@ -11,7 +10,7 @@ const Offers = () => {
     return (
         <div className="category">
             <header>
-                <p className="pageHeader">Offers</p>
+                <p className="pageHeader">Garage</p>
             </header>
         </div>
     );
