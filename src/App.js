@@ -8,7 +8,6 @@ import Garage from './pages/Garage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import FrogotPassword from './pages/FrogotPassword';
-import { NavbarDefault } from './pages/NavbarDefault';
 import Header from './components/header/Header';
 
 function App() {
