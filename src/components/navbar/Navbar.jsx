@@ -15,15 +15,15 @@ const Navbar = () => {
     <footer className="navbar">
       <nav className="navbarNav">
         <ul className="navbarListItems">
-          <li className="navbarListItem" onClick={() => navigate("/")}>
+          <li className="navbarListItem" onClick={() => navigate("/trajets")}>
             <CalendarDaysIcon
-              fill={pathMatchRoute("/") ? "#2C2C2C" : "#8F8F8F"}
+              fill={pathMatchRoute("/trajets") ? "#2C2C2C" : "#8F8F8F"}
               width="36px"
               height="36px"
             />
             <p
                 className={
-                    pathMatchRoute('/')
+                    pathMatchRoute('/trajets')
                     ? 'navbarListItemNameActive'
                     : 'navbarListItemName'
                 }
