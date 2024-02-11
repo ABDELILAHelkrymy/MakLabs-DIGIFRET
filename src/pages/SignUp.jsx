@@ -16,7 +16,8 @@ import {
   Stepper,
   Step,
 } from "@material-tailwind/react";
-import { SidebarWithBurgerMenu } from "../components/sideBar/Sidbar";
+import { useGoogleLogin } from "@react-oauth/google";
+
 export const ArrowRightIconComponent = () => (
   <img src={ArrowRightIcon} alt="" />
 );
@@ -44,6 +45,11 @@ const SignUP = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
   };
+
+  const login = useGoogleLogin({
+    onSuccess: tokenResponse => console.log(tokenResponse),
+    redirect_uri : "http://localhost:3000",
+  });
 
   return (
     <>
@@ -89,6 +95,7 @@ const SignUP = () => {
                     variant="filled"
                     color="blue-gray"
                     className="flex items-center gap-3"
+                    onClick={login}
                   >
                     <img
                       src={googleIcon}
