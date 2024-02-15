@@ -31,10 +31,10 @@ const PrivatePolicy = () => {
   useEffect(() => {
     if (error) {
       navigate("/sign-up/step1");
-    } else if (authData.user.isCompleted){
+    } else if (authData?.user?.isCompleted){
       navigate("/success");
     }
-  }, [error]);
+  }, [authData, error]);
 
   return (
     <div className="pageContainer">
