@@ -20,22 +20,18 @@ const SignUP = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    console.log(authData);
     if(authData){
-      dispatch(editAuthData({
-        ...EditedAuthData,
-        provider: authData.user.provider,
-        providerId: authData.user.providerId,
-      }));
       if (authData.user.isCompleted) {
-        console.log("isCompleted");
         navigate("/garage");
       } else {
-        console.log("notCompleted");
+        dispatch(editAuthData({
+          ...EditedAuthData,
+          provider: authData.user.provider,
+          providerId: authData.user.providerId,
+        }));
         navigate("/sign-up/step2?step=step2");
       }
     }else {
-      console.log("no authData");
       navigate("/sign-up/step1?step=step1");
     }
   }, [authData]);

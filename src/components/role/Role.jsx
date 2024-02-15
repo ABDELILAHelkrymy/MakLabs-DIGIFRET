@@ -39,8 +39,8 @@ const Role = () => {
           multiple={false}
           onChange={(e) => onchange(e)}
         >
-          <Option value="transporteur">Transporteur</Option>
-          <Option value="chauffeur">Chauffeur</Option>
+          <Option value="transporter">Transporteur</Option>
+          <Option value="driver">Chauffeur</Option>
         </Select>
       </div>
 
