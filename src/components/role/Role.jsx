@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import { Option, Select, Typography } from '@material-tailwind/react'
+import { Button, Option, Select, Typography } from '@material-tailwind/react'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { editAuthData } from '../../services/app/user/userSlice';
@@ -44,9 +44,9 @@ const Role = () => {
         </Select>
       </div>
 
-      <button className="mt-40 w-80" onClick={sendData}>
+      <Button className="mt-40 w-80" onClick={sendData}>
         Continuer
-      </button>
+      </Button>
     </>
   )
 }
