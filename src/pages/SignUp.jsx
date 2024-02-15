@@ -28,14 +28,27 @@ const SignUP = () => {
         providerId: authData.user.providerId,
       }));
       if (authData.user.isCompleted) {
+        console.log("isCompleted");
         navigate("/garage");
       } else {
-        navigate("/sign-up/step2");
+        console.log("notCompleted");
+        navigate("/sign-up/step2?step=step2");
       }
     }else {
-      navigate("/sign-up/step1");
+      console.log("no authData");
+      navigate("/sign-up/step1?step=step1");
     }
   }, [authData]);
+
+  useEffect(() => {
+    if (step === "step1") {
+      setActiveStep(0);
+    } else if (step === "step2") {
+      setActiveStep(1);
+    } else {
+      setActiveStep(2);
+    }
+  }, [step]);
 
 
   return (
