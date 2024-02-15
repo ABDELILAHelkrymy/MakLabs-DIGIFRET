@@ -1,17 +1,18 @@
 import axios from "axios";
 
-const api_url = "https://jsonplaceholder.typicode.com/";
+const api_url = process.env.REACT_APP_BACKEND_URL;
 
 const api = async (url, opts= {})=> {
-    let token = localStorage.getItem("token");
+    const authData = localStorage.getItem("authData");
+    let token = authData ? JSON.parse(authData).token : "";
     try {
         const response = await axios(`${api_url}${url}`, {
             headers: {
                 Authorization: "Bearer " + token,
                 ...opts.headers,
             },
-            withCredentials : true,
-            ...opts
+            withCredentials : false,
+            ...opts,
         });
         return response;
     } catch (err) {

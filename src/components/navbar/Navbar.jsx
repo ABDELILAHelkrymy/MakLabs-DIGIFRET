@@ -45,20 +45,20 @@ const Navbar = () => {
             >
                 Garage</p>
           </li>
-          <li className="navbarListItem" onClick={() => navigate("/sign-up")}>
+          <li className="navbarListItem" onClick={() => navigate("client")}>
             <UserIcon
-              fill={pathMatchRoute("/sign-up") ? "#2C2C2C" : "#8F8F8F"}
+              fill={pathMatchRoute("/client") ? "#2C2C2C" : "#8F8F8F"}
               width="36px"
               height="36px"
             />
             <p
                 className={
-                    pathMatchRoute('/sign-up')
+                    pathMatchRoute('/client')
                     ? 'navbarListItemNameActive'
                     : 'navbarListItemName'
                 }
             >
-                Register</p>
+                Client</p>
           </li>
         </ul>
       </nav>
