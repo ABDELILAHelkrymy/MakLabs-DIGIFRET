@@ -62,7 +62,7 @@ export function SidebarWithBurgerMenu() {
         >
           <div className="mb-2 flex items-center gap-4 p-4">
             <Typography variant="h5" color="blue-gray">
-              DIGIFRIT
+              DIGIFRET
             </Typography>
           </div>
           <div className="p-2">

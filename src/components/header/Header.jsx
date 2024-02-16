@@ -8,7 +8,7 @@ const Header = () => {
     <header className='flex flex-row justify-between items-center my-3 mx-4'>
         <SidebarWithBurgerMenu />
         <Typography color='gray' className='text-3xl'>
-            DiGiFret
+            Digifret
         </Typography>
         <PhoneIcon className='phoneIcon h-10 w-10' />
     </header>

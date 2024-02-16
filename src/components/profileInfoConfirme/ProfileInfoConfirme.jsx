@@ -35,7 +35,7 @@ const ProfileInfoConfirme = () => {
     return (
         <>
             <Typography variant="h4" color="blue-gray">
-                Veullez confirmer votre profile
+                Veuillez confirmer votre profil
             </Typography>
 
             <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={onSubmit}>
@@ -45,11 +45,11 @@ const ProfileInfoConfirme = () => {
                         color="blue-gray"
                         className="-mb-3"
                     >
-                        Nom complete
+                        Nom complet
                     </Typography>
                     <Input
                         size="lg"
-                        placeholder="Nom complete"
+                        placeholder="Nom complet"
                         className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
                         labelProps={{
                             className: "before:content-none after:content-none",
@@ -99,7 +99,7 @@ const ProfileInfoConfirme = () => {
                     />
                 </div>
                 <Button type="submit" className="mt-6" fullWidth>
-                    Continue
+                    Continuer
                 </Button>
             </form>
         </>
