@@ -29,7 +29,7 @@ const Garage = (props) => {
                             {props.etat ?
                             (
                             <div className="flex items-center">
-                                <div className="font-bold">Disponnible</div>
+                                <div className="font-bold">Disponible</div>
                                 <PlayCircleIcon width="25px" height="25px" fill="#2eaa35"/>
                             </div>
                             )

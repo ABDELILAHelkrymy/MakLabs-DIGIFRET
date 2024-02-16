@@ -33,12 +33,12 @@ const Role = () => {
   return (
     <>
       <Typography variant="h4" color="blue-gray">
-        Quel est votre role?
+        Quel est votre rôle?
       </Typography>
       <div className="flex w-1/2 flex-col gap-4 mt-5">
         <Select
           size="lg"
-          placeholder="Selectionner votre role"
+          placeholder="Sélectionner votre role"
           className="w-full !border-t-blue-gray-900 focus:!border-t-gray-900"
           variant="standard"
           label="selectionner votre role"
@@ -49,7 +49,7 @@ const Role = () => {
           <Option value="driver">Chauffeur</Option>
         </Select>
       </div>
-      {isError && <Typography color="red">Veuillez selectionner votre role</Typography>}
+      {isError && <Typography color="red">Veuillez sélectionner votre rôle</Typography>}
 
       <Button className="mt-40 w-80" onClick={sendData}>
         Continuer
