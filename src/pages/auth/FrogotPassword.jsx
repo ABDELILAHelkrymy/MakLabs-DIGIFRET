@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { Toast, toast } from "react-toastify"
-import ArrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg"
+import ArrowRightIcon from "../../assets/svg/keyboardArrowRightIcon.svg"
 
 export const ArrowRightIconComponent = () => (
   <img src={ArrowRightIcon} alt="" />
@@ -11,7 +11,7 @@ const FrogotPassword = () => {
   const [email, setEmail] = useState('')
 
   const onChange = (e) => setEmail(e.target.value)
-  
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -24,16 +24,16 @@ const FrogotPassword = () => {
 
       <main>
         <form onSubmit={onSubmit}>
-          <input 
+          <input
             type="email"
             className="emailInput"
             placeholder="Email"
             id="email"
             value={email}
-            onChange={onChange} 
+            onChange={onChange}
           />
           <Link className="forgotPasswordLink" to='/sign-in'>Sign In</Link>
-    
+
           <div className="signInBar">
               <p className="signInText">Send Rest Link</p>
               <button className="signInButton">

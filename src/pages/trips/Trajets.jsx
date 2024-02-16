@@ -1,8 +1,8 @@
 import {React, useState} from "react";
-import Trajet from "../components/trajet/Trajet"
+import Trajet from "../../components/trajet/Trajet"
 
 const Explore = (props) => {
-  
+
   return (
     <div className="explore">
       <header>

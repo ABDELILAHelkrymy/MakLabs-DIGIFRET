@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editAuthData } from "../services/app/user/userSlice";
+import { editAuthData } from "../../services/app/user/userSlice";
 import {
   Card,
   Stepper,
   Step,
+  Spinner,
 } from "@material-tailwind/react";
-import ProfileInfoConfirme from "../components/profileInfoConfirme/ProfileInfoConfirme";
-import Role from "../components/role/Role";
-import AuthProvider from "../components/authProvider/AuthProvider";
+import ProfileInfoConfirme from "../../components/profileInfoConfirme/ProfileInfoConfirme";
+import Role from "../../components/role/Role";
+import AuthProvider from "../../components/authProvider/AuthProvider";
 
 const SignUP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { EditedAuthData } = useSelector((state) => state.user);
-  const { authData } = useSelector((state) => state.user);
+  const { authData, EditedAuthData, loading, error } = useSelector((state) => state.user);
   const { step } = useParams();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -49,6 +49,7 @@ const SignUP = () => {
 
   return (
     <>
+    {loading && <Spinner />}
       <div className="pageContainer">
 
         <main>

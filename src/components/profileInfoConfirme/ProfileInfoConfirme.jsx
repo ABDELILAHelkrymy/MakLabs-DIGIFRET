@@ -57,6 +57,7 @@ const ProfileInfoConfirme = () => {
                         name="fullname"
                         value={fullname}
                         onChange={(e) => onChange(e)}
+                        required
                     />
                     <Typography
                         variant="h6"
@@ -75,6 +76,7 @@ const ProfileInfoConfirme = () => {
                         name="phone"
                         value={phone}
                         onChange={(e) => onChange(e)}
+                        required
                     />
                     <Typography
                         variant="h6"
@@ -93,6 +95,7 @@ const ProfileInfoConfirme = () => {
                         name="email"
                         value={email}
                         onChange={(e) => onChange(e)}
+                        required
                     />
                 </div>
                 <Button type="submit" className="mt-6" fullWidth>

@@ -12,7 +12,7 @@ import {
     Badge
   } from "@material-tailwind/react";
 
-import IvecoImg from "../assets/img/garage/iveco.jpg"
+import IvecoImg from "../../assets/img/garage/iveco.jpg"
 const GarageDetails = () => {
     const navigate = useNavigate();
     return (
@@ -82,7 +82,7 @@ const GarageDetails = () => {
           </CardBody>
         </Card>
       </>
-        
+
     );
 };
 

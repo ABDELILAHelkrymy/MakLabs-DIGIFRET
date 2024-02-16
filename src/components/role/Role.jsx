@@ -9,20 +9,26 @@ import { editAuthData } from '../../services/app/user/userSlice';
 const Role = () => {
   const dispatch = useDispatch();
   const { EditedAuthData } = useSelector((state) => state.user);
+  const [isError, setIsError] = useState(false)
   const [role, setRole] = useState("");
 
   const onchange = (e) => {
     setRole(e);
+    setIsError(false)
   };
 
   const navigate = useNavigate();
 
   const sendData = () => {
-    dispatch(editAuthData({
-      ...EditedAuthData,
-      role: role,
-     }));
-    navigate("/private-policy");
+    if (role!=="") {
+      dispatch(editAuthData({
+        ...EditedAuthData,
+        role: role,
+      }));
+      navigate("/private-policy");
+    }else{
+      setIsError(true)
+    }
   }
   return (
     <>
@@ -43,6 +49,7 @@ const Role = () => {
           <Option value="driver">Chauffeur</Option>
         </Select>
       </div>
+      {isError && <Typography color="red">Veuillez selectionner votre role</Typography>}
 
       <Button className="mt-40 w-80" onClick={sendData}>
         Continuer

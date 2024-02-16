@@ -10,7 +10,6 @@ const getAUthData = () => {
   }
 
 const initialState = {
-    url: {},
     authData : getAUthData(),
     EditedAuthData: {
       provider : "",

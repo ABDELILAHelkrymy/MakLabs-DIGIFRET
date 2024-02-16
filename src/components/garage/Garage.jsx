@@ -26,14 +26,14 @@ const Garage = (props) => {
                     </div>
                     <div className="actions flex flex-col justify-between w-1/2 items-end ">
                         <div className="etat-trajet">
-                            {props.etat ? 
+                            {props.etat ?
                             (
                             <div className="flex items-center">
                                 <div className="font-bold">Disponnible</div>
                                 <PlayCircleIcon width="25px" height="25px" fill="#2eaa35"/>
                             </div>
                             )
-                            : 
+                            :
                             (
                             <div className="flex items-center">
                                 <div className="font-bold">En panne</div>

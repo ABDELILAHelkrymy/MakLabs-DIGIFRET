@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { editAuthData, editUserProfile } from "../services/app/user/userSlice";
+import { editUserProfile } from "../services/app/user/userSlice";
 
 const CUSTOM_ANIMATION = {
   mount: { scale: 1 },

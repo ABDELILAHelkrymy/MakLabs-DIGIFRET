@@ -8,8 +8,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { PlayPauseIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-import Map from "../components/Map";
-import "../components/trajet/trajet.css";
+import Map from "../../components/Map";
+import "../../components/trajet/trajet.css";
 import {
   Card,
   CardHeader,
