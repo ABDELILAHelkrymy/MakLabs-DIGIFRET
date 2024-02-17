@@ -1,14 +1,18 @@
-import React from "react";
+import {useState} from "react";
 import googleIcon from "../assets/svg/googleIcon.svg";
 import facebookIcon from "../assets/svg/facebookIcon.svg";
 import { Button } from "@material-tailwind/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProviderUrl } from "../services/app/user/userActions";
 
 const OAuth = ({provider}) => {
+  // if clicked then block the button and add spinner
+  const { isLoading } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleProviderClick = () => {
+    setLoading(true);
     dispatch(getProviderUrl(provider));
   };
 
@@ -19,6 +23,8 @@ const OAuth = ({provider}) => {
       color={provider === 'google' ? "blue-gray" : "light-blue"} // Choose color based on provider
       className="flex items-center gap-3"
       onClick={handleProviderClick}
+      loading={isLoading || loading}
+      disabled={isLoading || loading}
     >
       <img src={provider === 'google' ? googleIcon : facebookIcon} alt={provider === 'google' ? 'Google' : 'Facebook'} className="h-6 w-6" />
       J'ai un compte {provider === 'google' ? 'Google' : 'Facebook'}

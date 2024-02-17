@@ -11,6 +11,7 @@ const Role = () => {
   const { EditedAuthData } = useSelector((state) => state.user);
   const [isError, setIsError] = useState(false)
   const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onchange = (e) => {
     setRole(e);
@@ -25,6 +26,7 @@ const Role = () => {
         ...EditedAuthData,
         role: role,
       }));
+      setLoading(true);
       navigate("/private-policy");
     }else{
       setIsError(true)
@@ -51,7 +53,7 @@ const Role = () => {
       </div>
       {isError && <Typography color="red">Veuillez sélectionner votre rôle</Typography>}
 
-      <Button className="mt-40 w-80" onClick={sendData}>
+      <Button className="mt-40 w-80" onClick={sendData} loading={loading}>
         Continuer
       </Button>
     </>

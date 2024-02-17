@@ -15,7 +15,7 @@ import AuthProvider from "../../components/authProvider/AuthProvider";
 const SignUP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authData, EditedAuthData, loading, error } = useSelector((state) => state.user);
+  const { authData, EditedAuthData} = useSelector((state) => state.user);
   const { step } = useParams();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -30,9 +30,11 @@ const SignUP = () => {
           providerId: authData.user.providerId,
         }));
         navigate("/sign-up/step2?step=step2");
+        setActiveStep(1);
       }
     }else {
       navigate("/sign-up/step1?step=step1");
+      setActiveStep(0);
     }
   }, [authData]);
 
@@ -49,7 +51,6 @@ const SignUP = () => {
 
   return (
     <>
-    {loading && <Spinner />}
       <div className="pageContainer">
 
         <main>

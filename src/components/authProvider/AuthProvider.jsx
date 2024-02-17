@@ -4,7 +4,7 @@ import OAuth from '../OAuth'
 
 const AuthProvider = () => {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <Typography variant="h4" color="blue-gray" className="my-8">
         Ouvrir un nouveau compte
       </Typography>
@@ -12,7 +12,7 @@ const AuthProvider = () => {
         <OAuth provider={"google"} />
         <OAuth provider={"facebook"} />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import { editAuthData } from '../../services/app/user/userSlice'
 
 const ProfileInfoConfirme = () => {
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { EditedAuthData } = useSelector((state) => state.user);
+    const { EditedAuthData, authData } = useSelector((state) => state.user);
     const [fromData, setFormData] = useState({
         fullname: "",
         phone: "",
-        email: "",
+        email: authData?.user?.email || "",
       });
       const { fullname, phone, email } = fromData;
 
@@ -30,6 +31,7 @@ const ProfileInfoConfirme = () => {
           phone,
           email,
         }));
+        setLoading(true);
         navigate("/sign-up/step3");
       };
     return (
@@ -98,7 +100,7 @@ const ProfileInfoConfirme = () => {
                         required
                     />
                 </div>
-                <Button type="submit" className="mt-6" fullWidth>
+                <Button type="submit" className="mt-6" fullWidth loading={loading}>
                     Continuer
                 </Button>
             </form>

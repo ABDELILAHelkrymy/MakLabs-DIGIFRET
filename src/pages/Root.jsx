@@ -4,13 +4,13 @@ import Header from "../components/header/Header";
 import Navbar from "../components/navbar/Navbar";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import Spinner from "../components/spinner/Spinner";
+import { Spinner } from "@material-tailwind/react";
 
 function Root() {
   const navigate = useNavigate();
   const params = new URLSearchParams(window.location.search);
   const stepValue = params.get("step") ? params.get("step") : "step1";
-  const { authData, loading } = useSelector((state) => state.user);
+  const { authData, isLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!authData) {
@@ -20,8 +20,12 @@ function Root() {
   return (
     <>
       <Header />
-      {loading && <Spinner />}
-      <Outlet />
+      {isLoading ?
+        <div className="flex justify-center items-center h-screen">
+          <Spinner color="light-blue" size="xl" />
+        </div>
+        : <Outlet />
+      }
       {authData?.user?.isCompleted && <Navbar />}
     </>
   );

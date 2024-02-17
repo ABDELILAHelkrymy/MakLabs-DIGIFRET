@@ -35,15 +35,29 @@ const userSlice = createSlice({
         }
         },
     extraReducers:(builder) => {
+        builder.addCase(getProviderUrl.pending, (state) => {
+            state.isLoading = true;
+        });
         builder.addCase(getProviderUrl.fulfilled, (state, action) => {
             state.url = action.payload;
             state.isLoading = false;
             state.error = null;
         });
+        builder.addCase(getProviderUrl.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error.message;
+        });
+        builder.addCase(getProviderCallback.pending, (state) => {
+            state.isLoading = true;
+        });
         builder.addCase(getProviderCallback.fulfilled, (state, action) => {
             state.authData = action.payload;
             state.isLoading = false;
             state.error = null;
+        });
+        builder.addCase(getProviderCallback.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error.message;
         });
         builder.addCase(editUserProfile.pending, (state) => {
             state.isLoading = true;
