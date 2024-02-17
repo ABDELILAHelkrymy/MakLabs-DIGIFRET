@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProviderUrl, getProviderCallback, editUserProfile } from "./userActions";
+import { getProviderUrl, getProviderCallback, editUserProfile } from "./authActions";
 
 const getAUthData = () => {
     const authData = localStorage.getItem("authData");
@@ -23,8 +23,8 @@ const initialState = {
     error: null,
     };
 
-const userSlice = createSlice({
-    name: "user",
+const authSlice = createSlice({
+    name: "auth",
     initialState,
     reducers: {
         editAuthData: (state, action) => {
@@ -74,6 +74,6 @@ const userSlice = createSlice({
     }
     });
 
-export { getProviderUrl, getProviderCallback, editUserProfile };
-export const { editAuthData } = userSlice.actions;
-export default userSlice.reducer;
+//export { getProviderUrl, getProviderCallback, editUserProfile };
+export const { editAuthData } = authSlice.actions;
+export default authSlice.reducer;

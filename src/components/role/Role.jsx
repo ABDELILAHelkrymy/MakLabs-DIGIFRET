@@ -2,13 +2,13 @@ import {useState} from 'react'
 import { Button, Option, Select, Typography } from '@material-tailwind/react'
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { editAuthData } from '../../services/app/user/userSlice';
+import { editAuthData } from '../../services/app/auth/authSlice';
 
 
 
 const Role = () => {
   const dispatch = useDispatch();
-  const { EditedAuthData } = useSelector((state) => state.user);
+  const { EditedAuthData } = useSelector((state) => state.auth);
   const [isError, setIsError] = useState(false)
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);

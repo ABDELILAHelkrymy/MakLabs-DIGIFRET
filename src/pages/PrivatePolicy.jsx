@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { editUserProfile } from "../services/app/user/userSlice";
+import { editUserProfile } from "../services/app/auth/authActions";
 
 const CUSTOM_ANIMATION = {
   mount: { scale: 1 },
@@ -19,7 +19,7 @@ const CUSTOM_ANIMATION = {
 const PrivatePolicy = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { EditedAuthData, error, authData } = useSelector((state) => state.user);
+    const { EditedAuthData, error, authData } = useSelector((state) => state.auth);
   const [open, setOpen] = React.useState(0);
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value);

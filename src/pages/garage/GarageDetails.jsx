@@ -51,7 +51,7 @@ const GarageDetails = () => {
             </CardBody>
         </Card>
         {/* Bloc actions */}
-        <Card className="overflow-hidden rounded-t-none">
+        <Card className="overflow-hidden rounded-t-none min-h-svh">
           <CardBody>
             <div className="garage-detail flex justify-between items-end flex-wrap">
                 <div className="flex w-1/2 flex-col items-center p-5">

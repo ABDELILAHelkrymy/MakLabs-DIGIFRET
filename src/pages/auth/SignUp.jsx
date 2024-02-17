@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { editAuthData } from "../../services/app/user/userSlice";
+import { editAuthData } from "../../services/app/auth/authSlice";
 import {
   Card,
   Stepper,
@@ -15,7 +15,7 @@ import AuthProvider from "../../components/authProvider/AuthProvider";
 const SignUP = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authData, EditedAuthData} = useSelector((state) => state.user);
+  const { EditedAuthData, authData } = useSelector((state) => state.auth);
   const { step } = useParams();
   const [activeStep, setActiveStep] = useState(0);
 

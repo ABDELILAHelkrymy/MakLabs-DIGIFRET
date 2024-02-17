@@ -17,6 +17,7 @@ const api = async (url, opts= {})=> {
         return response;
     } catch (err) {
         console.log(err);
+        throw err;
     }
 };
 

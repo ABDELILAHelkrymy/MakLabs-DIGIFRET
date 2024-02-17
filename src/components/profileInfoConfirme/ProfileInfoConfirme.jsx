@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { Button, Input, Typography } from '@material-tailwind/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { editAuthData } from '../../services/app/user/userSlice'
+import { editAuthData } from '../../services/app/auth/authSlice'
 
 const ProfileInfoConfirme = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { EditedAuthData, authData } = useSelector((state) => state.user);
+    const { EditedAuthData, authData } = useSelector((state) => state.auth);
     const [fromData, setFormData] = useState({
         fullname: "",
         phone: "",

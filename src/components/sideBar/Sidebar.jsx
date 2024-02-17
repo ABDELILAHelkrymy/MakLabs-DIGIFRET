@@ -32,19 +32,19 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
- 
+
 export function SidebarWithBurgerMenu() {
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
- 
+
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
- 
+
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
- 
+
   return (
     <>
       <IconButton variant="text" size="lg" onClick={openDrawer}>
@@ -56,7 +56,7 @@ export function SidebarWithBurgerMenu() {
       </IconButton>
       <Drawer open={isDrawerOpen} onClose={closeDrawer}>
         <Card
-          color="transparent"
+          color="white"
           shadow={false}
           className="h-[calc(100vh-2rem)] w-full p-4"
         >

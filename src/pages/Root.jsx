@@ -10,7 +10,7 @@ function Root() {
   const navigate = useNavigate();
   const params = new URLSearchParams(window.location.search);
   const stepValue = params.get("step") ? params.get("step") : "step1";
-  const { authData, isLoading } = useSelector((state) => state.user);
+  const { authData, isLoading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!authData) {

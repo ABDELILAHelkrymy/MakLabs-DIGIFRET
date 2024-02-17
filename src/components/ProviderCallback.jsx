@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { getProviderCallback } from "../services/app/user/userActions";
+import { getProviderCallback } from "../services/app/auth/authActions";
 
 const ProviderCallback = () => {
     const dispatch = useDispatch();

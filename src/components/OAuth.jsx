@@ -3,11 +3,11 @@ import googleIcon from "../assets/svg/googleIcon.svg";
 import facebookIcon from "../assets/svg/facebookIcon.svg";
 import { Button } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProviderUrl } from "../services/app/user/userActions";
+import { getProviderUrl } from "../services/app/auth/authActions";
 
 const OAuth = ({provider}) => {
   // if clicked then block the button and add spinner
-  const { isLoading } = useSelector((state) => state.user);
+  const { isLoading } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
