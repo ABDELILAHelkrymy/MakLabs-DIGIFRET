@@ -1,5 +1,6 @@
-import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { useState, useEffect } from 'react'
+import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
+import { Spinner } from '@material-tailwind/react';
 
 const containerStyle = {
   width: '400px',
@@ -11,38 +12,69 @@ const center = {
   lng: -38.523
 };
 
-function Map() {
+const Map = ({ origin, destination }) => {
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "YOUR_API_KEY"
-  })
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    libraries: ["places"],
+  });
 
-  const [map, setMap] = React.useState(null)
+  const [map, setMap] = useState(null);
+  const [directionsResponse, setDirectionsResponse] = useState(null);
+  const [distance, setDistance] = useState('');
+  const [duration, setDuration] = useState('');
 
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
 
-    setMap(map)
-  }, [])
 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
+  const center = { lat: 32.71705009221249, lng: -7.869855156455536 }
 
-  return isLoaded ? (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
-  ) : <></>
+  useEffect(() => {
+    async function calculateRoute(origine, destination) {
+      try {
+        // eslint-disable-next-line no-undef
+        const directionsService = new google.maps.DirectionsService();
+        const results = await directionsService.route({
+          origin: origine,
+          destination: destination,
+          // eslint-disable-next-line no-undef
+          travelMode: google.maps.TravelMode.DRIVING,
+        });
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance.text);
+        setDuration(results.routes[0].legs[0].duration.text);
+      } catch (error) {
+        console.error('Error calculating route:', error);
+      }
+    }
+
+    calculateRoute(origin, destination);
+  }, [isLoaded, origin, destination]);
+
+  if (!isLoaded) return (
+    <div className='flex justify-center'>
+      <Spinner color="blue" size="large" />
+    </div>
+  );
+
+  return(
+
+    <GoogleMap
+      center={center}
+      zoom={6}
+      mapContainerStyle={{ width: "100%", height: "200px" }}
+      options={{
+        zoomControl: false,
+        streetViewControl: false,
+        fullscreenControl: false,
+        mapTypeControl: false,
+      }}
+      onLoad={(map) => setMap(map)}
+    >
+      <Marker position={center} />
+      {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
+    </GoogleMap>
+  )
+
 }
 
-export default React.memo(Map)
+export default Map;

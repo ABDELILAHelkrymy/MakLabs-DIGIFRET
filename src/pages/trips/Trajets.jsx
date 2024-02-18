@@ -9,8 +9,8 @@ const Explore = (props) => {
         <p className="pageHeader">Trajets</p>
       </header>
       <main>
-        <Trajet etat={false} />
-        <Trajet etat={true}/>
+        <Trajet etat={false} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}}/>
+        <Trajet etat={true} points={{origin: "Fes, Morocco", destination: "Meknes, Morocco"}}/>
       </main>
     </div>
   )
