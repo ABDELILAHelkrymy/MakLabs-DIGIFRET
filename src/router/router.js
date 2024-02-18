@@ -17,6 +17,7 @@ import PrivatePolicy from "../pages/PrivatePolicy";
 import SuccesPage from "../pages/SuccesPage";
 import Client from "../pages/client/Client";
 import ErrorPage from "../pages/ErrorPage";
+import NouveauEntretien from "../pages/garage/NouveauEntretien";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
             { path: "/private-policy", element: <PrivatePolicy />},
             { path: "/success", element: <SuccesPage />},
             { path: "client", element: <Client />},
+            { path: "nouvelle-tache-entretien", element: <NouveauEntretien />}
         ]
     }
 ]);
