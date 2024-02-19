@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { editAuthData } from "../../services/app/auth/authSlice";
 import {
   Card,
-  Stepper,
-  Step,
-  Spinner,
 } from "@material-tailwind/react";
+import Stepper  from "../../components/stepper/Stepper";
 import ProfileInfoConfirme from "../../components/profileInfoConfirme/ProfileInfoConfirme";
 import Role from "../../components/role/Role";
 import AuthProvider from "../../components/authProvider/AuthProvider";
@@ -64,13 +62,7 @@ const SignUP = () => {
             shadow={false}
           >
             <div className="w-full py-4 px-8">
-              <Stepper
-                activeStep={activeStep}
-              >
-                <Step>1</Step>
-                <Step>2</Step>
-                <Step>3</Step>
-              </Stepper>
+              <Stepper activeStep={activeStep} />
             </div>
             {activeStep === 0 ? (
               <AuthProvider />

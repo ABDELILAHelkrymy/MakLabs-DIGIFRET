@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProviderUrl } from "../services/app/auth/authActions";
 
 const OAuth = ({provider}) => {
-  // if clicked then block the button and add spinner
   const { isLoading } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();

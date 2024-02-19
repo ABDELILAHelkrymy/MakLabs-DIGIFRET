@@ -4,7 +4,7 @@ import Header from "../components/header/Header";
 import Navbar from "../components/navbar/Navbar";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { Spinner } from "@material-tailwind/react";
+import Spinner from "../components/spinner/Spinner";
 
 function Root() {
   const navigate = useNavigate();
@@ -21,9 +21,7 @@ function Root() {
     <>
       <Header />
       {isLoading ?
-        <div className="flex justify-center items-center h-screen">
-          <Spinner color="light-blue" size="xl" />
-        </div>
+        <Spinner />
         : <Outlet />
       }
       {authData?.user?.isCompleted && <Navbar />}

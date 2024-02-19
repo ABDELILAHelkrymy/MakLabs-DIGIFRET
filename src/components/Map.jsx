@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
-import { Spinner } from '@material-tailwind/react';
+import Spinner from './spinner/Spinner';
 
 const containerStyle = {
   width: '400px',
@@ -50,11 +50,7 @@ const Map = ({ origin, destination }) => {
     calculateRoute(origin, destination);
   }, [isLoaded, origin, destination]);
 
-  if (!isLoaded) return (
-    <div className='flex justify-center'>
-      <Spinner color="blue" size="large" />
-    </div>
-  );
+  if (!isLoaded) return <Spinner />;
 
   return(
 
@@ -70,7 +66,6 @@ const Map = ({ origin, destination }) => {
       }}
       onLoad={(map) => setMap(map)}
     >
-      <Marker position={center} />
       {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
     </GoogleMap>
   )
