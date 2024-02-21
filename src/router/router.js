@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/Root";
-import Trajets from "../pages/trips/Trajets";
+import TripsPage from "../pages/trips/TripsPage";
 import Garage from "../pages/garage/Garage";
 import SignIn from "../pages/auth/SignIn";
 import SignUp from "../pages/auth/SignUp";
 import FrogotPassword from "../pages/auth/FrogotPassword";
-import TrajetDetails from '../pages/trips/TrajetDetails';
+import TripDetailPage from '../pages/trips/TripDetailPage';
 import GarageDetails from '../pages/garage/GarageDetails';
 import Entretien from "../pages/garage/Entretien";
 import Documents from "../pages/garage/Documents";
@@ -25,12 +25,12 @@ const router = createBrowserRouter([
         element: <Root />,
         errorElement: <ErrorPage />,
         children: [
-            { path: "trajets", element: <Trajets /> },
+            { path: "trajets", element: <TripsPage /> },
             { path: "garage", element: <Garage /> },
             { path: "sign-in", element: <SignIn /> },
             { path: "sign-up/:step", element: <SignUp /> },
             { path: "forgotpassword", element: <FrogotPassword /> },
-            { path: "trajet-detail", element: <TrajetDetails />},
+            { path: "trajet-detail", element: <TripDetailPage />},
             { path: "garage-detail", element: <GarageDetails />},
             { path: "entretien-garage", element: <Entretien />},
             { path: "documents-garage", element: <Documents />},

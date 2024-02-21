@@ -9,7 +9,7 @@ import {
     Typography,
   } from "@material-tailwind/react";
 
-const Trajet = (props) => {
+const Trip = (props) => {
     const navigate = useNavigate();
     const points = props.points;
     return (
@@ -53,4 +53,4 @@ const Trajet = (props) => {
         </Card>
     );
 }
-export default Trajet;
+export default Trip;

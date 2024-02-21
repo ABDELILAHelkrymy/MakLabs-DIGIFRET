@@ -9,7 +9,7 @@ import {
 import { PlayPauseIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import Map from "../../components/Map";
-import "../../components/trajet/trajet.css";
+import "../../components/trip/trip.css";
 import {
   Card,
   CardHeader,
@@ -17,7 +17,7 @@ import {
 } from "@material-tailwind/react";
 
 
-const TrajetDetails = () => {
+const TripDetailPage = () => {
   const params = new URLSearchParams(window.location.search);
   const origineRef = params.get("origin");
     const destinationRef = params.get("destination");
@@ -104,4 +104,4 @@ const TrajetDetails = () => {
   );
 };
 
-export default TrajetDetails;
+export default TripDetailPage;

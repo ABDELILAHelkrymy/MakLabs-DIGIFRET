@@ -1,9 +1,9 @@
-import api from "../../api/api";
+import apiCall from "../../api/apiCall";
 
 export const authProviderAuthorize = async (provider) => {
   const redirect_uri = process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
   try {
-    const response = await api(`/auth/v1/${provider}/authorize`, {
+    const response = await apiCall(`/auth/v1/${provider}/authorize`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,13 +18,14 @@ export const authProviderAuthorize = async (provider) => {
     }
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
 
 export const authProviderCallback = async (code, provider) => {
   const redirect_uri = process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
   try {
-    const response = await api(`/auth/v1/${provider}/callback`, {
+    const response = await apiCall(`/auth/v1/${provider}/callback`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,12 +42,13 @@ export const authProviderCallback = async (code, provider) => {
     }
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
 
 export const updateUserProfile = async (data) => {
   try {
-    const response = await api("/auth/v1/register-trans", {
+    const response = await apiCall("/auth/v1/register-trans", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,5 +62,6 @@ export const updateUserProfile = async (data) => {
     }
   } catch (err) {
     console.log(err);
+    throw err;
   }
 }

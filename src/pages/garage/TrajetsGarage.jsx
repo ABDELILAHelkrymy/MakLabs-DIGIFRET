@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
-import Trajet from "../../components/trajet/Trajet"
+import Trip from "../../components/trip/Trip";
 
 const TrajetsGarage = () => {
     const navigate = useNavigate();
@@ -15,9 +15,9 @@ const TrajetsGarage = () => {
         </div>
         {/* Page Content  */}
         <div className="explore">
-            <Trajet etat={false} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
-            <Trajet etat={true} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
-            <Trajet etat={true} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
+            <Trip etat={false} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
+            <Trip etat={true} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
+            <Trip etat={true} points={{origin: "Fes, Morocco", destination: "Rabat, Morocco"}} />
         </div>
         </>
     );

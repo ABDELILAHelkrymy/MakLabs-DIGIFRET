@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api_url = process.env.REACT_APP_BACKEND_URL;
 
-const api = async (url, opts= {})=> {
+const apiCall = async (url, opts= {})=> {
     const authData = localStorage.getItem("authData");
     let token = authData ? JSON.parse(authData).token : "";
     try {
@@ -21,4 +21,4 @@ const api = async (url, opts= {})=> {
     }
 };
 
-export default api;
+export default apiCall;
