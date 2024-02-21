@@ -39,7 +39,7 @@ const BilanCarbone = () => {
             <ArrowUpTrayIcon width="25px" height="25px" fill="none"/>
         </div>
         {/* Page Content  */}
-        <div className="explore min-h-svh">
+        <div className="explore">
             <Card>
                 <CardBody>
                     <div className="rounded-xl shadow-md p-4 text-center bg-purple-50">

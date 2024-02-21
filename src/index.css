@@ -33,6 +33,11 @@ button {
 .explore {
   margin: 1rem;
 }
+
+.explore{
+  margin-bottom: 90px;
+}
+
 @media (min-width: 1024px) {
   .pageContainer,
   .offers,

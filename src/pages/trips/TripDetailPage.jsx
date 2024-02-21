@@ -25,81 +25,70 @@ const TripDetailPage = () => {
 
   return (
     <>
-      <div className="flex justify-between p-5 bg-white">
-        <div className="">
-          <ChevronLeftIcon
-            width="20px"
-            height="20px"
-            onClick={() => {
-              navigate("/trajets");
-            }}
-          />
-        </div>
-        <div className="">Détail du trajet</div>
-        <div className="">
-          <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" />
-        </div>
+      {/* Page Titre */}
+      <div className="flex justify-between p-5 bg-white text-gray-700">
+          <ChevronLeftIcon width="20px" height="20px" onClick={() => {navigate("/trajets");}} />
+          <div className="">Détail du trajet</div>
+          <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" onClick={() => {navigate('/nouvelle-tache-entretien')}}/>
       </div>
-      <Card className="overflow-hidden rounded-t-none">
-        <CardHeader
-          floated={false}
-          shadow={false}
-          color="transparent"
-          className="m-0 rounded-none"
-        >
-          <Map origin={origineRef} destination={destinationRef}/>
-        </CardHeader>
-        <CardBody>
-          <div className="trajet-detail flex justify-between items-end">
-            <div>
-              <div className="flex items-center">
-                <IdentificationIcon
-                  width="20px"
-                  height="20px"
-                  className="mr-2"
-                />
-                <span className="font-bold">Rentabilité :</span>
+      {/* Page Content  */}
+      <div className="explore">
+        <Card className="overflow-hidden rounded-t-none">
+          <CardHeader floated={false} shadow={false} color="transparent" className="m-0 rounded-none">
+            <Map origin={origineRef} destination={destinationRef}/>
+          </CardHeader>
+          <CardBody>
+            <div className="trajet-detail flex justify-between items-end">
+              <div>
+                <div className="flex items-center">
+                  <IdentificationIcon
+                    width="20px"
+                    height="20px"
+                    className="mr-2"
+                  />
+                  <span className="font-bold">Rentabilité :</span>
+                </div>
+                <div>18 Kms à vide, 50 DHS/Km</div>
               </div>
-              <div>18 Kms à vide, 50 DHS/Km</div>
+              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
             </div>
-            <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
-          </div>
-          <div className="trajet-detail flex justify-between items-end">
-            <div>
-              <div className="flex items-center">
-                <ArrowDownTrayIcon
-                  width="20px"
-                  height="20px"
-                  className="mr-2"
-                />
-                <span className="font-bold">Chargement :</span>
+            <div className="trajet-detail flex justify-between items-end">
+              <div>
+                <div className="flex items-center">
+                  <ArrowDownTrayIcon
+                    width="20px"
+                    height="20px"
+                    className="mr-2"
+                  />
+                  <span className="font-bold">Chargement :</span>
+                </div>
+                <div>12 AV Zerktouni - Casablanca</div>
               </div>
-              <div>12 AV Zerktouni - Casablanca</div>
+              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
             </div>
-            <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
-          </div>
-          <div className="trajet-detail flex justify-between items-end">
-            <div>
-              <div className="flex items-center">
-                <ArrowUpTrayIcon width="20px" height="20px" className="mr-2" />
-                <span className="font-bold">Déchargement :</span>
+            <div className="trajet-detail flex justify-between items-end">
+              <div>
+                <div className="flex items-center">
+                  <ArrowUpTrayIcon width="20px" height="20px" className="mr-2" />
+                  <span className="font-bold">Déchargement :</span>
+                </div>
+                <div>302 BVD Moammed V - Agadir </div>
               </div>
-              <div>302 BVD Moammed V - Agadir </div>
+              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
             </div>
-            <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
-          </div>
-          <div className="trajet-detail flex justify-between items-end">
-            <div>
-              <div className="flex items-center">
-                <ArchiveBoxIcon width="20px" height="20px" className="mr-2" />
-                <span className="font-bold">Cargaison :</span>
+            <div className="trajet-detail flex justify-between items-end">
+              <div>
+                <div className="flex items-center">
+                  <ArchiveBoxIcon width="20px" height="20px" className="mr-2" />
+                  <span className="font-bold">Cargaison :</span>
+                </div>
+                <div>3.5 T, 40 Palettes</div>
               </div>
-              <div>3.5 T, 40 Palettes</div>
+              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
             </div>
-            <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
-          </div>
-        </CardBody>
-      </Card>
+          </CardBody>
+        </Card>
+      </div>
     </>
   );
 };
