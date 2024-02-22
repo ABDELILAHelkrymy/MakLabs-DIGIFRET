@@ -1,6 +1,6 @@
-import { Typography } from '@material-tailwind/react'
-import React from 'react'
-import OAuth from '../OAuth'
+import { Typography } from "@material-tailwind/react";
+import React from "react";
+import OAuth from "../../OAuth";
 
 const AuthProvider = () => {
   return (
@@ -13,7 +13,7 @@ const AuthProvider = () => {
         <OAuth provider={"facebook"} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthProvider
+export default AuthProvider;
