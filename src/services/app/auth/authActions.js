@@ -1,5 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authProviderAuthorize, authProviderCallback, updateUserProfile } from "./authApi";
+import getApiCaller from "../../api/getApiCaller";
+
+const authApi = getApiCaller("auth");
 
 export const getProviderUrl = createAsyncThunk(
     "user/getUrl",
@@ -26,3 +29,7 @@ export const editUserProfile = createAsyncThunk(
         return response;
     }
     );
+
+export const loginWithEmail = createAsyncThunk("user/emailLogin", async (data) => {
+  return await authApi({ action: "login", method: "POST", data });
+});

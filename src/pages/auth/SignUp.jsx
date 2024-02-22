@@ -8,7 +8,8 @@ import {
 import Stepper  from "../../components/stepper/Stepper";
 import ProfileInfoConfirme from "../../components/profileInfoConfirme/ProfileInfoConfirme";
 import Role from "../../components/role/Role";
-import AuthProvider from "../../components/authProvider/AuthProvider";
+import AuthProvider from "../../components/auth/authProvider/AuthProvider";
+import AuthForm from "../../components/auth/auth-form/AuthForm";
 
 const SignUP = () => {
   const dispatch = useDispatch();
@@ -65,7 +66,10 @@ const SignUP = () => {
               <Stepper activeStep={activeStep} />
             </div>
             {activeStep === 0 ? (
+              <>
               <AuthProvider />
+              <AuthForm />
+              </>
             ) : activeStep === 1 ? (
               <ProfileInfoConfirme />
             ) : (
