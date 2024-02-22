@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   IconButton,
@@ -32,8 +31,10 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 export function SidebarWithBurgerMenu() {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -188,7 +189,11 @@ export function SidebarWithBurgerMenu() {
               </ListItemPrefix>
               Settings
             </ListItem>
-            <ListItem>
+            <ListItem
+              onClick={() => {
+                navigate("/logout");
+              }}
+            >
               <ListItemPrefix>
                 <PowerIcon className="h-5 w-5" />
               </ListItemPrefix>
