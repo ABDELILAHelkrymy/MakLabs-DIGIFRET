@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProviderUrl, getProviderCallback, editUserProfile } from "./authActions";
+import { getProviderUrl, getProviderCallback, editUserProfile, loginWithEmail } from "./authActions";
 
 const getAUthData = () => {
     const authData = localStorage.getItem("authData");
@@ -59,6 +59,25 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.error = action.error.message;
         });
+
+        // loginWithEmail reducer cases
+        builder.addCase(loginWithEmail.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(loginWithEmail.fulfilled, (state, action) => {
+            state.authData = action.payload;
+            if (action.payload.token)
+                localStorage.setItem("token", action.payload.token);
+            if (action.payload.user)
+                localStorage.setItem("authData", JSON.stringify(action.payload));
+            state.isLoading = false;
+            state.error = null;
+        });
+        builder.addCase(loginWithEmail.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error.message;
+        });
+
         builder.addCase(editUserProfile.pending, (state) => {
             state.isLoading = true;
         });
@@ -74,6 +93,6 @@ const authSlice = createSlice({
     }
     });
 
-//export { getProviderUrl, getProviderCallback, editUserProfile };
+export { getProviderUrl, getProviderCallback, editUserProfile, loginWithEmail };
 export const { editAuthData } = authSlice.actions;
 export default authSlice.reducer;
