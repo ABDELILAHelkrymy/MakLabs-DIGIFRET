@@ -19,6 +19,7 @@ import Client from "../pages/client/Client";
 import ErrorPage from "../pages/ErrorPage";
 import NouveauEntretien from "../pages/garage/NouveauEntretien";
 import Logout from "../pages/auth/Logout";
+import AddGarage from "../pages/garage/AddGarage";
 
 const router = createBrowserRouter([
     {
@@ -43,7 +44,8 @@ const router = createBrowserRouter([
             { path: "/private-policy", element: <PrivatePolicy />},
             { path: "/success", element: <SuccesPage />},
             { path: "client", element: <Client />},
-            { path: "nouvelle-tache-entretien", element: <NouveauEntretien />}
+            { path: "nouvelle-tache-entretien", element: <NouveauEntretien />},
+            { path: "nouveau-camion", element: <AddGarage />}
         ]
     }
 ]);
