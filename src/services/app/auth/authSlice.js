@@ -32,8 +32,13 @@ const authSlice = createSlice({
                 ...state.EditedAuthData,
                 ...action.payload,
             };
-        }
         },
+        logout: (state, action) => {
+            localStorage.removeItem("authData");
+            localStorage.removeItem("token");
+            state.authData = null;
+        },
+    },
     extraReducers:(builder) => {
         builder.addCase(getProviderUrl.pending, (state) => {
             state.isLoading = true;
@@ -75,5 +80,5 @@ const authSlice = createSlice({
     });
 
 //export { getProviderUrl, getProviderCallback, editUserProfile };
-export const { editAuthData } = authSlice.actions;
+export const { editAuthData, logout } = authSlice.actions;
 export default authSlice.reducer;
