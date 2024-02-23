@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronLeftIcon, CheckCircleIcon, ChevronDoubleRightIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
+import { ChevronLeftIcon, CheckCircleIcon, ChevronDoubleRightIcon, PlusCircleIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { Card, CardBody, CardHeader, Input, Typography, Button } from "@material-tailwind/react";
 const AddGarage = () => {
 

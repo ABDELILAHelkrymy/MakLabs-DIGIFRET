@@ -1,11 +1,4 @@
-import {
-  ArchiveBoxIcon,
-  ArrowDownTrayIcon,
-  ArrowUpTrayIcon,
-  ChevronDoubleRightIcon,
-  ChevronLeftIcon,
-  IdentificationIcon,
-} from "@heroicons/react/24/solid";
+import { ArchiveBoxIcon, ArrowDownTrayIcon, ArrowUpTrayIcon, ChevronDoubleRightIcon, ChevronLeftIcon, IdentificationIcon } from "@heroicons/react/24/solid";
 import { PlayPauseIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import Map from "../../components/Map";
@@ -50,7 +43,7 @@ const TripDetailPage = () => {
                 </div>
                 <div>18 Kms à vide, 50 DHS/Km</div>
               </div>
-              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" />
+              <ChevronDoubleRightIcon width="20px" height="20px" className="mb-2" onClick={() => {navigate('/retour-trajet')}}/>
             </div>
             <div className="trajet-detail flex justify-between items-end">
               <div>

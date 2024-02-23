@@ -20,6 +20,14 @@ import ErrorPage from "../pages/ErrorPage";
 import NouveauEntretien from "../pages/garage/NouveauEntretien";
 import Logout from "../pages/auth/Logout";
 import AddGarage from "../pages/garage/AddGarage";
+import PilotageTrajet from "../pages/trips/PilotageTrajet";
+import NotificationTrajet from "../pages/trips/NotificationTrajet";
+import NouveauTrajet from "../pages/trips/NouveauTrajet";
+import RetourTrajet from "../pages/trips/RetourTrajet";
+import RetourTrajetDispo from "../pages/trips/RetourTrajetDispo";
+import NewTripStOne from "../pages/trips/NewTripStOne";
+import NewTripThTwo from "../pages/trips/NewTripThTwo";
+import NewTripRdThree from "../pages/trips/NewTripRdThree";
 
 const router = createBrowserRouter([
     {
@@ -45,7 +53,15 @@ const router = createBrowserRouter([
             { path: "/success", element: <SuccesPage />},
             { path: "client", element: <Client />},
             { path: "nouvelle-tache-entretien", element: <NouveauEntretien />},
-            { path: "nouveau-camion", element: <AddGarage />}
+            { path: "nouveau-camion", element: <AddGarage />},
+            { path: "pilotage-trajet", element: <PilotageTrajet />},
+            { path: "notification-trajet", element: <NotificationTrajet />},
+            { path: "new-trajet", element: <NouveauTrajet />},
+            { path: "retour-trajet", element: <RetourTrajet />},
+            { path: "retour-dispo", element: <RetourTrajetDispo />},
+            { path: "new-trip-step1", element: <NewTripStOne />},
+            { path: "new-trip-step2", element: <NewTripThTwo />},
+            { path: "new-trip-step3", element: <NewTripRdThree />}
         ]
     }
 ]);
