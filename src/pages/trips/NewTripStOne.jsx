@@ -4,14 +4,14 @@ import { ChevronLeftIcon, PlusIcon, ChevronDownIcon } from "@heroicons/react/24/
 import { Card, CardBody, Stepper, Step, Select, Option, Input, Button } from "@material-tailwind/react";
 
 const NewTripStOne = () => {
-    
+
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLastStep, setIsLastStep] = React.useState(false);
     const [isFirstStep, setIsFirstStep] = React.useState(false);
     const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
     const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
-  
+
     return (
         <>
         {/* Page Titre */}
@@ -22,7 +22,7 @@ const NewTripStOne = () => {
         </div>
         {/* Page Content  */}
         <div className="explore">
-            <Card>
+            <Card className="z-0">
                 <CardBody>
                     <Stepper
                         activeStep={activeStep}
@@ -37,7 +37,7 @@ const NewTripStOne = () => {
                     <div className="bloc-adresse-existante" >
                         <div className="flex items-center justify-between pt-5 pb-5" >
                             <span className="font-bold">Adresse existante :</span>
-                            <ChevronDownIcon height="20px" width="20px" />  
+                            <ChevronDownIcon height="20px" width="20px" />
                         </div>
                         <div className="list-element p-5 ">
                             <Select variant="standard" label="Séléctionner une adresse">
@@ -50,7 +50,7 @@ const NewTripStOne = () => {
                     <div className="bloc-adresse-nouvelle">
                         <div className="flex items-center justify-between pt-5 pb-5">
                             <span className="font-bold">Nouvelle Adresse :</span>
-                            <ChevronDownIcon height="20px" width="20px" />  
+                            <ChevronDownIcon height="20px" width="20px" />
                         </div>
                         <div className="list-element p-5">
                             <div className="pt-5 pb-5"><Input name="nom" label="Nom complet"/></div>

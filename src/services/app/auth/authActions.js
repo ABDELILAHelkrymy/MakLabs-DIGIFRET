@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authProviderAuthorize, authProviderCallback, updateUserProfile } from "./authApi";
-import getApiCaller from "../../api/getApiCaller";
+import {getAuthCaller} from "../../api/getBackCaller";
 
-const authApi = getApiCaller("auth");
+const authApi = getAuthCaller("auth");
 
 export const getProviderUrl = createAsyncThunk(
     "user/getUrl",

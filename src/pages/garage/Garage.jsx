@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid"
 import { Button } from "@material-tailwind/react";
 import Garage from "../../components/garage/Garage";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllGarageTrucks } from "../../services/app/garage/garageActions";
 
 
 const Offers = () => {
-    const [listings, setListings] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const { garageTrucks, loading, error } = useSelector((state) => state.garage);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(garageTrucks);
+    }, [garageTrucks]);
 
     return (
         <div className="explore">

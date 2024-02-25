@@ -5,14 +5,14 @@ import { Card, CardBody, Stepper, Step, Input, Button } from "@material-tailwind
 import CalendarElement from "../../components/CalendarElement";
 
 const NewTripRdThree = () => {
-    
+
     const navigate = useNavigate();
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLastStep, setIsLastStep] = React.useState(false);
     const [isFirstStep, setIsFirstStep] = React.useState(false);
     const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
     const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
-  
+
     return (
         <>
         {/* Page Titre */}
