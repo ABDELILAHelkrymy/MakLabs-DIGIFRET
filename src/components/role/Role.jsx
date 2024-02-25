@@ -1,37 +1,37 @@
-import {useState} from 'react'
-import { Button, Option, Select, Typography } from '@material-tailwind/react'
-import { useNavigate } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { editAuthData } from '../../services/app/auth/authSlice';
-
-
+import { useState } from "react";
+import { Button, Option, Select, Typography } from "@material-tailwind/react";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { editAuthData } from "../../services/app/auth/authSlice";
 
 const Role = () => {
   const dispatch = useDispatch();
   const { EditedAuthData } = useSelector((state) => state.auth);
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
 
   const onchange = (e) => {
     setRole(e);
-    setIsError(false)
+    setIsError(false);
   };
 
   const navigate = useNavigate();
 
   const sendData = () => {
-    if (role!=="") {
-      dispatch(editAuthData({
-        ...EditedAuthData,
-        role: role,
-      }));
+    if (role !== "") {
+      dispatch(
+        editAuthData({
+          ...EditedAuthData,
+          role: role,
+        })
+      );
       setLoading(true);
       navigate("/private-policy");
-    }else{
-      setIsError(true)
+    } else {
+      setIsError(true);
     }
-  }
+  };
   return (
     <>
       <Typography variant="h4" color="blue-gray">
@@ -51,13 +51,15 @@ const Role = () => {
           <Option value="driver">Chauffeur</Option>
         </Select>
       </div>
-      {isError && <Typography color="red">Veuillez sélectionner votre rôle</Typography>}
+      {isError && (
+        <Typography color="red">Veuillez sélectionner votre rôle</Typography>
+      )}
 
       <Button className="mt-40 w-80" onClick={sendData} loading={loading}>
         Continuer
       </Button>
     </>
-  )
-}
+  );
+};
 
-export default Role
+export default Role;

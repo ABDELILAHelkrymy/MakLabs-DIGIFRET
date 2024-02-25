@@ -1,6 +1,6 @@
-.trajet-detail{
-    padding: 10px 0;
+.trajet-detail {
+  padding: 10px 0;
 }
-.trajet-detail:not(:nth-last-of-type(1)){
-    border-bottom: 1px solid #e1e1e1;
+.trajet-detail:not(:nth-last-of-type(1)) {
+  border-bottom: 1px solid #e1e1e1;
 }

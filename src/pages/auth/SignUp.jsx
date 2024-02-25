@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editAuthData } from "../../services/app/auth/authSlice";
-import {
-  Card,
-} from "@material-tailwind/react";
-import Stepper  from "../../components/stepper/Stepper";
+import { Card } from "@material-tailwind/react";
+import Stepper from "../../components/stepper/Stepper";
 import ProfileInfoConfirme from "../../components/profileInfoConfirme/ProfileInfoConfirme";
 import Role from "../../components/role/Role";
 import AuthProvider from "../../components/auth/authProvider/AuthProvider";
@@ -19,19 +17,21 @@ const SignUP = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    if(authData){
+    if (authData) {
       if (authData.user.isCompleted) {
         navigate("/garage");
       } else {
-        dispatch(editAuthData({
-          ...EditedAuthData,
-          provider: authData.user.provider,
-          providerId: authData.user.providerId,
-        }));
+        dispatch(
+          editAuthData({
+            ...EditedAuthData,
+            provider: authData.user.provider,
+            providerId: authData.user.providerId,
+          })
+        );
         navigate("/sign-up/step2?step=step2");
         setActiveStep(1);
       }
-    }else {
+    } else {
       navigate("/sign-up/step1?step=step1");
       setActiveStep(0);
     }
@@ -47,11 +47,9 @@ const SignUP = () => {
     }
   }, [step]);
 
-
   return (
     <>
       <div className="pageContainer">
-
         <main>
           <Card
             style={{
@@ -67,8 +65,8 @@ const SignUP = () => {
             </div>
             {activeStep === 0 ? (
               <>
-              <AuthProvider />
-              <AuthForm />
+                <AuthProvider />
+                <AuthForm />
               </>
             ) : activeStep === 1 ? (
               <ProfileInfoConfirme />

@@ -1,15 +1,21 @@
-import { useState, useEffect } from 'react'
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer } from "@react-google-maps/api";
-import Spinner from './spinner/Spinner';
+import { useState, useEffect } from "react";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+import Spinner from "./spinner/Spinner";
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: "400px",
+  height: "400px",
 };
 
 const center = {
   lat: -3.745,
-  lng: -38.523
+  lng: -38.523,
 };
 
 const Map = ({ origin, destination }) => {
@@ -21,12 +27,10 @@ const Map = ({ origin, destination }) => {
 
   const [map, setMap] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
 
-
-
-  const center = { lat: 32.71705009221249, lng: -7.869855156455536 }
+  const center = { lat: 32.71705009221249, lng: -7.869855156455536 };
 
   useEffect(() => {
     async function calculateRoute(origine, destination) {
@@ -43,7 +47,7 @@ const Map = ({ origin, destination }) => {
         setDistance(results.routes[0].legs[0].distance.text);
         setDuration(results.routes[0].legs[0].duration.text);
       } catch (error) {
-        console.error('Error calculating route:', error);
+        console.error("Error calculating route:", error);
       }
     }
 
@@ -52,8 +56,7 @@ const Map = ({ origin, destination }) => {
 
   if (!isLoaded) return <Spinner />;
 
-  return(
-
+  return (
     <GoogleMap
       center={center}
       zoom={6}
@@ -66,10 +69,11 @@ const Map = ({ origin, destination }) => {
       }}
       onLoad={(map) => setMap(map)}
     >
-      {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
+      {directionsResponse && (
+        <DirectionsRenderer directions={directionsResponse} />
+      )}
     </GoogleMap>
-  )
-
-}
+  );
+};
 
 export default Map;

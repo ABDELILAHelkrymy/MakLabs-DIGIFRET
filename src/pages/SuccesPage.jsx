@@ -21,10 +21,12 @@ const SuccesPage = () => {
           </CardBody>
         </Card>
         <div className="flex justify-center my-5">
-            <Button size="lg" className="w-80">
-              <Link to="/garage" className="text-white">Ajouter un camion</Link>
-            </Button>
-          </div>
+          <Button size="lg" className="w-80">
+            <Link to="/garage" className="text-white">
+              Ajouter un camion
+            </Link>
+          </Button>
+        </div>
       </main>
     </div>
   );
