@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function AuthFormUI({ login, email, password, setEmail, setPassword, error }) {
+export default function AuthFormUI({
+  login,
+  email,
+  password,
+  setEmail,
+  setPassword,
+  error,
+}) {
   return (
     <div className="mt-6">
       <form onSubmit={login}>

@@ -1,5 +1,9 @@
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
-import { TruckIcon, CalendarDaysIcon, UserIcon } from "@heroicons/react/24/solid";
+import {
+  TruckIcon,
+  CalendarDaysIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -22,13 +26,14 @@ const Navbar = () => {
               height="36px"
             />
             <p
-                className={
-                    pathMatchRoute('/trajets')
-                    ? 'navbarListItemNameActive'
-                    : 'navbarListItemName'
-                }
+              className={
+                pathMatchRoute("/trajets")
+                  ? "navbarListItemNameActive"
+                  : "navbarListItemName"
+              }
             >
-                Trajets</p>
+              Trajets
+            </p>
           </li>
           <li className="navbarListItem" onClick={() => navigate("/garage")}>
             <TruckIcon
@@ -37,13 +42,14 @@ const Navbar = () => {
               height="36px"
             />
             <p
-                className={
-                    pathMatchRoute('/garage')
-                    ? 'navbarListItemNameActive'
-                    : 'navbarListItemName'
-                }
+              className={
+                pathMatchRoute("/garage")
+                  ? "navbarListItemNameActive"
+                  : "navbarListItemName"
+              }
             >
-                Garage</p>
+              Garage
+            </p>
           </li>
           <li className="navbarListItem" onClick={() => navigate("client")}>
             <UserIcon
@@ -52,13 +58,14 @@ const Navbar = () => {
               height="36px"
             />
             <p
-                className={
-                    pathMatchRoute('/client')
-                    ? 'navbarListItemNameActive'
-                    : 'navbarListItemName'
-                }
+              className={
+                pathMatchRoute("/client")
+                  ? "navbarListItemNameActive"
+                  : "navbarListItemName"
+              }
             >
-                Client</p>
+              Client
+            </p>
           </li>
         </ul>
       </nav>

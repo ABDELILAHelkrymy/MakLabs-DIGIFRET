@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkingStatus, setCheckingStatus] = useState(true);
-  const isMounted = useRef(true)
+  const isMounted = useRef(true);
 
   useEffect(() => {
     if (isMounted) {
@@ -14,8 +14,8 @@ export const useAuthStatus = () => {
       }, 1000);
     }
     return () => {
-        isMounted.current = false
-    }
+      isMounted.current = false;
+    };
   }, [isMounted]);
 
   return { loggedIn, checkingStatus };

@@ -20,13 +20,13 @@ const SignIn = () => {
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.id]: e.target.value
-    }))
+      [e.target.id]: e.target.value,
+    }));
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <>

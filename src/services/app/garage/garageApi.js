@@ -8,4 +8,4 @@ export const getAllGarageTrucks = async () => {
     },
   });
   return response.data;
-}
+};

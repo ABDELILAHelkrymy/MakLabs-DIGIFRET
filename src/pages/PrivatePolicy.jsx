@@ -17,9 +17,11 @@ const CUSTOM_ANIMATION = {
 };
 
 const PrivatePolicy = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { EditedAuthData, error, authData } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { EditedAuthData, error, authData } = useSelector(
+    (state) => state.auth
+  );
   const [open, setOpen] = React.useState(0);
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
@@ -31,7 +33,7 @@ const PrivatePolicy = () => {
   useEffect(() => {
     if (error) {
       navigate("/sign-up/step1");
-    } else if (authData?.user?.isCompleted){
+    } else if (authData?.user?.isCompleted) {
       navigate("/success");
     }
   }, [authData, error]);
@@ -116,9 +118,7 @@ const PrivatePolicy = () => {
             </AccordionBody>
           </Accordion>
 
-          <Button onClick={sendData}>
-            Continuer
-          </Button>
+          <Button onClick={sendData}>Continuer</Button>
         </Card>
       </main>
     </div>

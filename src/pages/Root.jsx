@@ -20,10 +20,7 @@ function Root() {
   return (
     <>
       <Header />
-      {isLoading ?
-        <Spinner />
-        : <Outlet />
-      }
+      {isLoading ? <Spinner /> : <Outlet />}
       {authData?.user?.isCompleted && <Navbar />}
     </>
   );

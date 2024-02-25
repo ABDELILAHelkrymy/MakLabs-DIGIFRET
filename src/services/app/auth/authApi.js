@@ -1,7 +1,8 @@
 import apiCall from "../../api/apiCall";
 
 export const authProviderAuthorize = async (provider) => {
-  const redirect_uri = process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
+  const redirect_uri =
+    process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
   try {
     const response = await apiCall(`/auth/v1/${provider}/authorize`, {
       method: "POST",
@@ -23,7 +24,8 @@ export const authProviderAuthorize = async (provider) => {
 };
 
 export const authProviderCallback = async (code, provider) => {
-  const redirect_uri = process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
+  const redirect_uri =
+    process.env.REACT_APP_REDIRECT_URI + `/auth/${provider}/callback`;
   try {
     const response = await apiCall(`/auth/v1/${provider}/callback`, {
       method: "POST",
@@ -32,7 +34,7 @@ export const authProviderCallback = async (code, provider) => {
       },
       data: {
         code,
-        redirect_uri : redirect_uri
+        redirect_uri: redirect_uri,
       },
     });
     if (response) {
@@ -53,7 +55,7 @@ export const updateUserProfile = async (data) => {
       headers: {
         "Content-Type": "application/json",
       },
-      data : data
+      data: data,
     });
     if (response) {
       const { data } = response;
@@ -64,4 +66,4 @@ export const updateUserProfile = async (data) => {
     console.log(err);
     throw err;
   }
-}
+};

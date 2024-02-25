@@ -4,9 +4,9 @@
 
 @layer components {
   .trajet-element {
-      @apply p-3 bg-white w-1/3 text-center;      
+    @apply p-3 bg-white w-1/3 text-center;
   }
-  .is-active{
+  .is-active {
     @apply border-b-4 border-b-purple-100;
   }
 }
