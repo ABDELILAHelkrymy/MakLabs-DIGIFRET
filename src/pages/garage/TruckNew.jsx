@@ -2,9 +2,7 @@ import { useNavigate } from "react-router-dom";
 import {
   ChevronLeftIcon,
   CheckCircleIcon,
-  ChevronDoubleRightIcon,
   PlusCircleIcon,
-  HeartIcon,
 } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -14,7 +12,7 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-const AddGarage = () => {
+const TruckNew = () => {
   const navigate = useNavigate();
 
   return (
@@ -48,14 +46,14 @@ const AddGarage = () => {
           <CardBody>
             <div className="garage flex justify-between text-xs">
               <div className="garage-content w-1/2">
-                <div class="flex items-center justify-center w-full">
+                <div className="flex items-center justify-center w-full">
                   <label
-                    for="dropzone-file"
-                    class="flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 "
+                    htmlFor="dropzone-file"
+                    className="flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 "
                   >
-                    <div class="flex flex-col items-center justify-center p-2">
+                    <div className="flex flex-col items-center justify-center p-2">
                       <svg
-                        class="w-5 h-5 mb-2 text-gray-500"
+                        className="w-5 h-5 mb-2 text-gray-500"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -69,13 +67,13 @@ const AddGarage = () => {
                           d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                         />
                       </svg>
-                      <p class="mb-2 text-sm text-gray-500 text-center">
-                        <span class="font-semibold">
+                      <p className="mb-2 text-sm text-gray-500 text-center">
+                        <span className="font-semibold">
                           Cliquez pour télécharger
                         </span>
                       </p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" className="hidden" />
                   </label>
                 </div>
               </div>
@@ -122,4 +120,4 @@ const AddGarage = () => {
     </>
   );
 };
-export default AddGarage;
+export default TruckNew;

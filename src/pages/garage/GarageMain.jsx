@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
-import Garage from "../../components/garage/Garage";
+import GarageTruck from "../../components/garage/garage-truck/GarageTruck";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllGarageTrucks } from "../../services/app/garage/garageActions";
 
-const Offers = () => {
+const GarageMain = () => {
   const dispatch = useDispatch();
   const { garageTrucks, loading, error } = useSelector((state) => state.garage);
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ const Offers = () => {
         <p className="pageHeader">Garage</p>
       </header>
       <main>
-        <Garage etat={false} />
-        <Garage etat={true} />
+        <GarageTruck etat={false} />
+        <GarageTruck etat={true} />
         <Button
           fullWidth
           className="mt-3 flex justify-center items-center gap-3 bg-purple-400"
@@ -38,4 +38,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default GarageMain;

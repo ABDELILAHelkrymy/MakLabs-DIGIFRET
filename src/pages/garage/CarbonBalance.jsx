@@ -11,7 +11,7 @@ import {
 import { Card, CardBody, Button } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
 
-const BilanCarbone = () => {
+const FuelBalance = () => {
   const navigate = useNavigate();
   const chartConfig = {
     type: "pie",
@@ -132,4 +132,4 @@ const BilanCarbone = () => {
   );
 };
 
-export default BilanCarbone;
+export default FuelBalance;

@@ -13,7 +13,7 @@ import {
 import { Card, CardBody, Button, Input } from "@material-tailwind/react";
 import CalendarElement from "../../components/CalendarElement";
 
-const NouveauEntretien = () => {
+const TruckMaintenanceNew = () => {
   const navigate = useNavigate();
 
   return (
@@ -103,4 +103,4 @@ const NouveauEntretien = () => {
     </>
   );
 };
-export default NouveauEntretien;
+export default TruckMaintenanceNew;

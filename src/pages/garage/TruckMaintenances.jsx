@@ -7,7 +7,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@material-tailwind/react";
 
-const Entretien = () => {
+const TruckMaintenances = () => {
   const navigate = useNavigate();
 
   return (
@@ -37,7 +37,7 @@ const Entretien = () => {
           <CardBody className="text-center">
             <div className="flex items-center pb-6">
               <CalendarDaysIcon width="25px" height="25px" className="mr-2" />
-              <span className="font-bold">Entretien et maintenance</span>
+              <span className="font-bold">Maintenance et Entretien</span>
             </div>
             <div className="flex p-3 border-b-[2px] items-center">
               <div className="w-1/3 text-left">21/04</div>
@@ -73,4 +73,4 @@ const Entretien = () => {
   );
 };
 
-export default Entretien;
+export default TruckMaintenances;
