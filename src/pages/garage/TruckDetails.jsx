@@ -17,7 +17,7 @@ import {
 } from "@material-tailwind/react";
 
 import IvecoImg from "../../assets/img/garage/iveco.jpg";
-const GarageDetails = () => {
+const TruckDetails = () => {
   const navigate = useNavigate();
   return (
     <div>
@@ -143,4 +143,4 @@ const GarageDetails = () => {
   );
 };
 
-export default GarageDetails;
+export default TruckDetails;

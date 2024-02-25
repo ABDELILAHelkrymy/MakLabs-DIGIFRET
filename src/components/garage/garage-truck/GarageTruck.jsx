@@ -19,9 +19,9 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import IvecoImg from "../../assets/img/garage/iveco.jpg";
+import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 
-const Garage = (props) => {
+const GarageTruck = (props) => {
   const navigate = useNavigate();
   return (
     <Card className="mt-8">
@@ -70,4 +70,4 @@ const Garage = (props) => {
     </Card>
   );
 };
-export default Garage;
+export default GarageTruck;

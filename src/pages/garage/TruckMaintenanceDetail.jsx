@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@material-tailwind/react";
 
-const EntretienDetail = () => {
+const TruckMaintenanceDetail = () => {
   const navigate = useNavigate();
 
   return (
@@ -77,4 +77,4 @@ const EntretienDetail = () => {
   );
 };
 
-export default EntretienDetail;
+export default TruckMaintenanceDetail;

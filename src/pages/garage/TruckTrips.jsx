@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import Trip from "../../components/trip/Trip";
 
-const TrajetsGarage = () => {
+const TruckTrips = () => {
   const navigate = useNavigate();
 
   return (
@@ -38,4 +38,4 @@ const TrajetsGarage = () => {
   );
 };
 
-export default TrajetsGarage;
+export default TruckTrips;
