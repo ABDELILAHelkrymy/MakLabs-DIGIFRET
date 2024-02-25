@@ -98,6 +98,7 @@ const ProfileInfoConfirme = () => {
                         value={email}
                         onChange={(e) => onChange(e)}
                         required
+                        disabled = {email? true: false}
                     />
                 </div>
                 <Button type="submit" className="mt-6" fullWidth loading={loading}>

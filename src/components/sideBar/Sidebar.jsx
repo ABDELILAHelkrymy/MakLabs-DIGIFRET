@@ -59,7 +59,7 @@ export function SidebarWithBurgerMenu() {
         <Card
           color="white"
           shadow={false}
-          className="h-[calc(100vh-2rem)] w-full p-4"
+          className="h-[calc(100vh-2rem)] w-full p-4 z-50 overflow-y-auto"
         >
           <div className="mb-2 flex items-center gap-4 p-4">
             <Typography variant="h5" color="blue-gray">

@@ -62,7 +62,7 @@ const SignUP = () => {
             color="transparent"
             shadow={false}
           >
-            <div className="w-full py-4 px-8">
+            <div className="w-full py-4 px-8 z-0">
               <Stepper activeStep={activeStep} />
             </div>
             {activeStep === 0 ? (
