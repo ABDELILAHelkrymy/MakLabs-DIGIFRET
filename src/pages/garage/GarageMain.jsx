@@ -1,19 +1,40 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
 import GarageTruck from "../../components/garage/garage-truck/GarageTruck";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllGarageTrucks } from "../../services/app/garage/garageActions";
+import { trucksGetAll } from "../../services/store/slices/trucksSlice";
 
 const GarageMain = () => {
   const dispatch = useDispatch();
-  const { garageTrucks, loading, error } = useSelector((state) => state.garage);
+  const trucksGetAllState = useSelector((state) => state.trucks.getAll);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(garageTrucks);
-  }, [garageTrucks]);
+    console.log("useEffect => DISPATCH : ", trucksGetAllState);
+    dispatch(trucksGetAll());
+  }, []);
+  useEffect(() => {
+    console.log("useEffect => trucksGetAllState : ", trucksGetAllState);
+  }, [trucksGetAllState]);
+  //   useEffect(() => {
+  //     if (data) {
+  //       console.log(data);
+  //     }
+  //   }, [data]);
+
+  //   useEffect(() => {
+  //     if (error) {
+  //       console.log(error);
+  //     }
+  //   }, [error]);
+
+  //   useEffect(() => {
+  //     if (loading) {
+  //       console.log("loading...");
+  //     }
+  //   }, [loading]);
 
   return (
     <div className="explore">
