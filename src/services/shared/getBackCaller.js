@@ -22,9 +22,18 @@ const getBackCaller = (module, ressource = "", version = "v1") => {
         withCredentials: false,
         ...opts,
       });
-      console.log(`${module} -> ${opts.method} -> ${reqUrl} -> response.data`, response.data);
+      console.log(
+        `${module} -> ${opts.method} -> ${reqUrl} -> response.data`,
+        response.data
+      );
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (err) {
+      if (err?.response?.data?.code === "AUTH_MIDLLEWARE_TOKEN_EXPIRED") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("authData");
+        document.location.href = "/sign-up/step1";
+      }
       console.log(err);
       throw err;
     }
