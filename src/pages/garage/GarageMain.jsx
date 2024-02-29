@@ -1,49 +1,60 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
 import GarageTruck from "../../components/garage/garage-truck/GarageTruck";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { trucksGetAll } from "../../services/store/slices/trucksSlice";
+import Spinner from "../../components/spinner/Spinner";
 
 const GarageMain = () => {
+  // const [data, setData] = useState();
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const trucksGetAllState = useSelector((state) => state.trucks.getAll);
+  const {authData} = useSelector((state) => state.auth);
+  const {data, isLoading, error} = useSelector((state) => state.trucks?.getAll);
+  //const {data=null, isLoading=false, error=null} = trucksGetAllState;
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("useEffect => DISPATCH : ", trucksGetAllState);
-    dispatch(trucksGetAll());
+      dispatch(trucksGetAll());
   }, []);
+
+  // useEffect(() => {
+  //   if(trucksGetAllState?.data){
+  //     setData(trucksGetAllState.data);
+  //     setIsLoading(false);
+  //   } else if(trucksGetAllState?.error){
+  //     setError(trucksGetAllState.error);
+  //     setIsLoading(false);
+  //   }
+  // }, [trucksGetAllState]);
+
   useEffect(() => {
-    console.log("useEffect => trucksGetAllState : ", trucksGetAllState);
-  }, [trucksGetAllState]);
-  //   useEffect(() => {
-  //     if (data) {
-  //       console.log(data);
-  //     }
-  //   }, [data]);
+    console.log({data, isLoading, error});
+  }
+  , [data, isLoading, error]);
 
-  //   useEffect(() => {
-  //     if (error) {
-  //       console.log(error);
-  //     }
-  //   }, [error]);
-
-  //   useEffect(() => {
-  //     if (loading) {
-  //       console.log("loading...");
-  //     }
-  //   }, [loading]);
+  if(error){
+    const errorMessage = authData.role === "transporter" ? "No Trucks in the garage under your responsability" : "You don't have any truck in your garage";
+    <p className="text-red-500 text-center">{errorMessage}</p>
+  }
 
   return (
-    <div className="explore">
-      <header>
+        <>
         <p className="pageHeader">Garage</p>
-      </header>
-      <main>
-        <GarageTruck etat={false} />
-        <GarageTruck etat={true} />
+        {
+          isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              {data?.trucks &&  data.trucks.map((truck) => (
+                <GarageTruck key={truck._id} id={truck._id} status={truck.status} brand={truck.brand} dateCirculation={truck.dateOfCirculation} />
+              ))}
+            </>
+          )
+        }
         <Button
           fullWidth
           className="mt-3 flex justify-center items-center gap-3 bg-purple-400"
@@ -54,8 +65,7 @@ const GarageMain = () => {
           <PlusCircleIcon height="25px" width="25px" className="" />
           Ajouter un camion
         </Button>
-      </main>
-    </div>
+        </>
   );
 };
 

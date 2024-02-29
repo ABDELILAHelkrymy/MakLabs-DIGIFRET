@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ChartPieIcon,
   CloudIcon,
@@ -6,7 +7,6 @@ import {
   MapIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
-import { useNavigate } from "react-router-dom";
 import { ChevronLeftIcon, IdentificationIcon } from "@heroicons/react/24/solid";
 import {
   Card,
@@ -15,10 +15,44 @@ import {
   Typography,
   Badge,
 } from "@material-tailwind/react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { trucksGetById } from "../../services/store/slices/trucksSlice";
+
 
 import IvecoImg from "../../assets/img/garage/iveco.jpg";
 const TruckDetails = () => {
+  const [truckData, setTruckData] = useState({
+    brand : "",
+    type : "",
+    status : "",
+    model : "",
+  });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { authData } = useSelector((state) => state.auth);
+  const trucksGetByIdState = useSelector((state) => state.trucks.getById);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(trucksGetById(id));
+  }, [id]);
+
+  // get the year based on date like that "2018-01-02T00:00:00.000Z"
+  const getYear = (date) => {
+    return new Date(date).getFullYear();
+  };
+
+  useEffect(() => {
+    if (trucksGetByIdState?.data) {
+      setTruckData({
+        brand: trucksGetByIdState.data.truck.brand,
+        type: trucksGetByIdState.data.truck.type,
+        status: trucksGetByIdState.data.truck.status,
+        model: getYear(trucksGetByIdState.data.truck.dateOfCirculation),
+      });
+    }
+  }, [trucksGetByIdState]);
   return (
     <div>
       {/* Page Header */}
@@ -30,7 +64,7 @@ const TruckDetails = () => {
             navigate("/garage");
           }}
         />
-        <div className="">IVECO - 2015</div>
+        <div className="">{truckData.brand} - {truckData.model}</div>
         <PencilSquareIcon width="25px" height="25px" fill="#2eaa35" />
       </div>
       {/* Page Content  */}
@@ -80,7 +114,7 @@ const TruckDetails = () => {
               <div
                 className="flex flex-col items-center p-5"
                 onClick={() => {
-                  navigate("/entretien-garage");
+                  navigate(`/entretien-garage/${id}`);
                 }}
               >
                 <Badge content="2">
@@ -95,7 +129,7 @@ const TruckDetails = () => {
               <div
                 className="flex flex-col items-center p-5"
                 onClick={() => {
-                  navigate("/documents-garage");
+                  navigate(`/documents-garage/${id}`);
                 }}
               >
                 <DocumentTextIcon width="30px" height="30px" />
@@ -108,7 +142,7 @@ const TruckDetails = () => {
               <div
                 className="flex flex-col items-center p-5"
                 onClick={() => {
-                  navigate("/trajets-garage");
+                  navigate(`/trajets-garage/${id}`);
                 }}
               >
                 <MapIcon width="30px" height="30px" />
@@ -121,7 +155,7 @@ const TruckDetails = () => {
               <div
                 className="flex flex-col items-center p-5"
                 onClick={() => {
-                  navigate("/bilan-carbone-garage");
+                  navigate(`/bilan-carbone-garage/${id}`);
                 }}
               >
                 <CloudIcon width="30px" height="30px" />

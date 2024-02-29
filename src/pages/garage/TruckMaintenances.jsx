@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ChevronLeftIcon,
   ChevronDoubleRightIcon,
@@ -6,9 +7,30 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@material-tailwind/react";
+import { maintenancesSearch } from "../../services/store/slices/maintenancesSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const TruckMaintenances = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+
+  const {data, isLoading, error} = useSelector((state) => state.maintenances.search);
+
+  const query = [
+    {
+      key: "truckId",
+      value: id,
+    },
+  ]
+  useEffect(() => {
+    dispatch(maintenancesSearch(query));
+  }, [id]);
+
+  useEffect(() => {
+    console.log({data, isLoading, error});
+  }, [data, isLoading, error]);
 
   return (
     <>
@@ -18,7 +40,7 @@ const TruckMaintenances = () => {
           width="20px"
           height="20px"
           onClick={() => {
-            navigate("/garage-detail");
+            navigate(`/garage-detail/${id}`);
           }}
         />
         <div className="">Liste des entretiens</div>
