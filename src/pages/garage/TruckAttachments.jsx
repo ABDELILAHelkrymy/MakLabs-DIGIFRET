@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@material-tailwind/react";
 
-const Documents = () => {
+const TruckAttachments = () => {
   const navigate = useNavigate();
 
   return (
@@ -99,4 +99,4 @@ const Documents = () => {
   );
 };
 
-export default Documents;
+export default TruckAttachments;

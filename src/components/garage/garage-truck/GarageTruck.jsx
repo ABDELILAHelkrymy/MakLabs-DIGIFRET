@@ -19,15 +19,34 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import IvecoImg from "../../assets/img/garage/iveco.jpg";
+import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 
-const Garage = (props) => {
+const GarageTruck = ({ id, status, brand, dateCirculation }) => {
   const navigate = useNavigate();
+
+  // get the year based on date like that "2018-01-02T00:00:00.000Z"
+  const getYear = (date) => {
+    return new Date(date).getFullYear();
+  };
+
+  const CalcStatusColor = (status) => {
+    switch (status) {
+      case "Disponible":
+        return "#2eaa35";
+      case "En panne":
+        return "#FF0000";
+      case "En livraison":
+        return "#f8a72f";
+      default:
+        return "bg-gray-200";
+    }
+  };
+
   return (
     <Card className="mt-8">
       <CardHeader className="bg-purple-100 flex items-center">
         <Typography variant="small" color="blue-gray" className="p-2">
-          IVECO - 2015
+          {brand} - {getYear(dateCirculation)}
         </Typography>
       </CardHeader>
       <CardBody>
@@ -37,17 +56,10 @@ const Garage = (props) => {
           </div>
           <div className="actions flex flex-col justify-between w-1/2 items-end ">
             <div className="etat-trajet">
-              {props.etat ? (
-                <div className="flex items-center">
-                  <div className="font-bold">Disponible</div>
-                  <PlayCircleIcon width="25px" height="25px" fill="#2eaa35" />
-                </div>
-              ) : (
-                <div className="flex items-center">
-                  <div className="font-bold">En panne</div>
-                  <PauseCircleIcon width="25px" height="25px" fill="#f8a72f" />
-                </div>
-              )}
+              <div className="flex items-center">
+                <div className="font-bold">{status}</div>
+                <PlayCircleIcon width="25px" height="25px" fill={CalcStatusColor(status)} />
+              </div>
             </div>
             <div className="text-right">
               <span>
@@ -60,7 +72,7 @@ const Garage = (props) => {
                 width="20px"
                 height="20px"
                 onClick={() => {
-                  navigate("/garage-detail");
+                  navigate(`/garage-detail/${id}`);
                 }}
               />
             </div>
@@ -70,4 +82,4 @@ const Garage = (props) => {
     </Card>
   );
 };
-export default Garage;
+export default GarageTruck;
