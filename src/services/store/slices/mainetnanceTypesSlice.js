@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addReducerApiCases } from "../../shared/reducerManager";
+import { addReducerApiCases, getDefaultInitialState } from "../../shared/reducerManager";
 import { generateApiActions, generateExportedActions } from "../../shared/actionsManager";
 
-const initialState = {};
+const apiInitialState = getDefaultInitialState();
 
-const mainetnanceTypesApiActions = generateApiActions("mainetnanceTypes");
+const initialState = {
+  ...apiInitialState,
+};
+
+const mainetnanceTypesApiActions = generateApiActions("maintenanceTypes");
 
 const mainetnanceTypesSlice = createSlice({
   name: "mainetnanceTypes",

@@ -20,7 +20,11 @@ function Root() {
   return (
     <>
       <Header />
-      {isLoading ? <Spinner /> : <Outlet />}
+      <div className="explore">
+        <main>
+          {isLoading ? <Spinner /> : <Outlet />}
+        </main>
+      </div>
       {authData?.user?.isCompleted && <Navbar />}
     </>
   );
