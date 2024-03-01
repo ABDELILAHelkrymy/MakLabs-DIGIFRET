@@ -8,6 +8,9 @@ import { trucksGetAll } from "../../services/store/slices/trucksSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 const GarageMain = () => {
+  // const [data, setData] = useState();
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const {authData} = useSelector((state) => state.auth);
   const {data, isLoading, error} = useSelector((state) => state.trucks?.getAll);
