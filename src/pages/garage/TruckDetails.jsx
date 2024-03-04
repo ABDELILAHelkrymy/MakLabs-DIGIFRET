@@ -19,14 +19,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { trucksGetById } from "../../services/store/slices/trucksSlice";
 
-
 import IvecoImg from "../../assets/img/garage/iveco.jpg";
 const TruckDetails = () => {
   const [truckData, setTruckData] = useState({
-    brand : "",
-    type : "",
-    status : "",
-    model : "",
+    brand: "",
+    type: "",
+    status: "",
+    model: "",
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,6 +40,10 @@ const TruckDetails = () => {
   // get the year based on date like that "2018-01-02T00:00:00.000Z"
   const getYear = (date) => {
     return new Date(date).getFullYear();
+  };
+
+  const handleUpdateRedirect = () => {
+    navigate(`/update-truck/?id=${id}`);
   };
 
   useEffect(() => {
@@ -64,15 +67,22 @@ const TruckDetails = () => {
             navigate("/garage");
           }}
         />
-        <div className="">{truckData.brand} - {truckData.model}</div>
-        <PencilSquareIcon width="25px" height="25px" fill="#2eaa35" />
+        <div className="">
+          {truckData.brand} - {truckData.model}
+        </div>
+        <PencilSquareIcon
+          width="25px"
+          height="25px"
+          fill="#2eaa35"
+          onClick={handleUpdateRedirect}
+        />
       </div>
       {/* Page Content  */}
       <div className="explore">
         <Card className="mt-8 ">
           <CardHeader className="bg-purple-100 flex items-center">
             <Typography variant="small" color="blue-gray" className="p-2">
-              IVECO - 2015
+              {truckData.brand} - {truckData.model}
             </Typography>
           </CardHeader>
           <CardBody>
@@ -178,3 +188,4 @@ const TruckDetails = () => {
 };
 
 export default TruckDetails;
+

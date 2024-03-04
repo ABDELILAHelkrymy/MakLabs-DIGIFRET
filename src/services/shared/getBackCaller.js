@@ -47,3 +47,4 @@ export const getAuthCaller = () => {
 export const getApiCaller = (resource) => {
   return getBackCaller("api", resource);
 };
+

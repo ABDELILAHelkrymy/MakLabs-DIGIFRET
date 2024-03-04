@@ -58,7 +58,11 @@ const GarageTruck = ({ id, status, brand, dateCirculation }) => {
             <div className="etat-trajet">
               <div className="flex items-center">
                 <div className="font-bold">{status}</div>
-                <PlayCircleIcon width="25px" height="25px" fill={CalcStatusColor(status)} />
+                <PlayCircleIcon
+                  width="25px"
+                  height="25px"
+                  fill={CalcStatusColor(status)}
+                />
               </div>
             </div>
             <div className="text-right">

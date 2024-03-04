@@ -19,6 +19,7 @@ export const generateDefaultApiActions = (ressource) => {
   });
 
   const update = createAsyncThunk(`${ressource}/update`, async (data) => {
+    console.log({ data });
     return await ressourceFetcher.update(data);
   });
 
@@ -68,3 +69,4 @@ export const generateExportedActions = (ressourceName, ressourceActions) => {
   console.log({ ressourceActionsKeys, exportedActions });
   return exportedActions;
 };
+

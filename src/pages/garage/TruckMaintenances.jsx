@@ -9,6 +9,8 @@ import {
 import { Card, CardBody } from "@material-tailwind/react";
 import { maintenancesSearch } from "../../services/store/slices/maintenancesSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../components/spinner/Spinner";
+import MaintenanceType from "../../components/garage/maintenance/MaintenanceType";
 
 const TruckMaintenances = () => {
   const navigate = useNavigate();
@@ -16,20 +18,22 @@ const TruckMaintenances = () => {
 
   const dispatch = useDispatch();
 
-  const {data, isLoading, error} = useSelector((state) => state.maintenances?.search);
+  const { data, isLoading, error } = useSelector(
+    (state) => state.maintenances?.search
+  );
 
   const query = [
     {
       key: "truckId",
       value: id,
     },
-  ]
+  ];
   useEffect(() => {
     dispatch(maintenancesSearch(query));
   }, [id]);
 
   useEffect(() => {
-    console.log({data, isLoading, error});
+    console.log({ data, isLoading, error });
   }, [data, isLoading, error]);
 
   return (
@@ -61,29 +65,21 @@ const TruckMaintenances = () => {
               <CalendarDaysIcon width="25px" height="25px" className="mr-2" />
               <span className="font-bold">Maintenance et Entretien</span>
             </div>
-            {
-              isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <>
-                  {data?.maintenances && data.maintenances.map((maintenance) => (
-                    <div className="flex p-3 border-b-[2px] items-center">
-                    <div className="w-1/3 text-left">21/04</div>
-                    <div className="w-1/3 text-left">{maintenance.maintenanceTypesId.name}</div>
-                    <div className="w-1/3 flex justify-end">
-                      <ChevronDoubleRightIcon
-                        width="25px"
-                        height="25px"
-                        onClick={() => {
-                          navigate("/entretien-garage-detail");
-                        }}
-                      />
-                    </div>
-                  </div>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                {data?.maintenances &&
+                  data.maintenances.map((maintenance) => (
+                    <MaintenanceType
+                      key={maintenance._id}
+                      id={maintenance._id}
+                      date={maintenance.date}
+                      name={maintenance.maintenanceTypesId.name}
+                    />
                   ))}
-                </>
-              )
-            }
+              </>
+            )}
           </CardBody>
         </Card>
       </div>
@@ -92,3 +88,4 @@ const TruckMaintenances = () => {
 };
 
 export default TruckMaintenances;
+

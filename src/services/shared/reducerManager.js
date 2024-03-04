@@ -17,13 +17,13 @@ export const addReducerApiCases = (builder, apiActions) => {
     builder.addCase(apiActions[apiAction].rejected, (state, action) => {
       if (!state[apiAction]) state[apiAction] = {};
       state[apiAction].isLoading = false;
-      state[apiAction].error = action.payload;
+      state[apiAction].error = action.error.message;
     });
   }
 };
 
 export const getDefaultInitialState = () => {
-  const actions = ['search', 'getAll', 'getById', 'create', 'update', 'remove'];
+  const actions = ["search", "getAll", "getById", "create", "update", "remove"];
   const defaultInitialState = {
     isLoading: false,
     data: null,
@@ -35,3 +35,4 @@ export const getDefaultInitialState = () => {
     return acc;
   }, {});
 };
+

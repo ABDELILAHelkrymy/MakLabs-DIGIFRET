@@ -15,7 +15,6 @@ import SignUp from "../pages/auth/SignUp";
 import FrogotPassword from "../pages/auth/FrogotPassword";
 import Logout from "../pages/auth/Logout";
 
-
 // garage routes
 import GarageMain from "../pages/garage/GarageMain";
 import TruckDetails from "../pages/garage/TruckDetails";
@@ -26,7 +25,7 @@ import CarbonBalance from "../pages/garage/CarbonBalance";
 import TruckMaintenanceDetail from "../pages/garage/TruckMaintenanceDetail";
 import TruckMaintenanceNew from "../pages/garage/TruckMaintenanceNew";
 import TruckNew from "../pages/garage/TruckNew";
-
+import TruckUpdate from "../pages/garage/TruckUpdate";
 // trips routes
 import PilotageTrajet from "../pages/trips/PilotageTrajet";
 import NotificationTrajet from "../pages/trips/NotificationTrajet";
@@ -60,7 +59,10 @@ const router = createBrowserRouter([
       { path: "documents-garage/:id", element: <TruckAttachments /> },
       { path: "trajets-garage/:id", element: <TruckTrips /> },
       { path: "bilan-carbone-garage/:id", element: <CarbonBalance /> },
-      { path: "entretien-garage-detail", element: <TruckMaintenanceDetail /> },
+      {
+        path: "entretien-garage-detail/:id",
+        element: <TruckMaintenanceDetail />,
+      },
       { path: "/auth/google/callback", element: <ProviderCallback /> },
       { path: "/private-policy", element: <PrivatePolicy /> },
       { path: "/success", element: <SuccesPage /> },
@@ -70,6 +72,7 @@ const router = createBrowserRouter([
       { path: "pilotage-trajet", element: <PilotageTrajet /> },
       { path: "notification-trajet", element: <NotificationTrajet /> },
       { path: "new-trajet", element: <NouveauTrajet /> },
+      { path: "update-truck", element: <TruckUpdate /> },
       { path: "retour-trajet", element: <RetourTrajet /> },
       { path: "retour-dispo", element: <RetourTrajetDispo /> },
       { path: "new-trip-step1", element: <NewTripStOne /> },
@@ -80,3 +83,4 @@ const router = createBrowserRouter([
 ]);
 
 export default router;
+
