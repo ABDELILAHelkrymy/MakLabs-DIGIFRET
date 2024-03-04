@@ -21,9 +21,7 @@ function Root() {
     <>
       <Header />
       <div className="explore">
-        <main>
-          {isLoading ? <Spinner /> : <Outlet />}
-        </main>
+        <main>{isLoading ? <Spinner /> : <Outlet />}</main>
       </div>
       {authData?.user?.isCompleted && <Navbar />}
     </>
