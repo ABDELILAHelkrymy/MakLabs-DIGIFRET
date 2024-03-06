@@ -24,7 +24,7 @@ const TruckMaintenanceNew = () => {
           width="20px"
           height="20px"
           onClick={() => {
-            navigate("/garage-detail");
+            navigate("/garage");
           }}
         />
         <div className="">Nouvelle tâche d'entretien</div>
@@ -104,3 +104,4 @@ const TruckMaintenanceNew = () => {
   );
 };
 export default TruckMaintenanceNew;
+
