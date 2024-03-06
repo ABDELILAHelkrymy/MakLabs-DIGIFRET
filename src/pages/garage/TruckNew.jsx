@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { trucksCreate } from "../../services/store/slices/trucksSlice";
+import toast, { Toaster } from "react-hot-toast";
 import {
   ChevronLeftIcon,
   CheckCircleIcon,
@@ -17,7 +18,11 @@ import {
 } from "@material-tailwind/react";
 
 const TruckNew = () => {
+  const { data, isLoading, error } = useSelector(
+    (state) => state.trucks?.create
+  );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     seller: "",
     buyer: "",
@@ -41,7 +46,6 @@ const TruckNew = () => {
     approvalNumber: "",
     usage: "",
   });
-  const navigate = useNavigate();
 
   const InputFrNames = {
     seller: "Vendeur",
@@ -73,12 +77,22 @@ const TruckNew = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     dispatch(trucksCreate(formData));
   };
 
+  useEffect(() => {
+    if (data) {
+      toast.success("Truck created successfully");
+      navigate("/garage");
+    }
+    if (error) {
+      toast.error("An error occured");
+    }
+  }, [data, error]);
+
   return (
     <>
+      <Toaster />
       <div className="flex justify-between p-5 bg-white text-gray-700">
         <ChevronLeftIcon
           width="20px"
@@ -178,3 +192,4 @@ const TruckNew = () => {
   );
 };
 export default TruckNew;
+
