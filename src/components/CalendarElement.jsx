@@ -9,17 +9,17 @@ import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
-export default function CalendarElement() {
-  const [date, setDate] = React.useState();
-
+export default function CalendarElement({ date, setDate }) {
   return (
     <div>
       <Popover placement="bottom">
         <PopoverHandler>
           <Input
             label="Sélectionner une Date"
-            onChange={() => null}
             value={date ? format(date, "PPP") : ""}
+            onChange={(e) => {
+              setDate(e.target.value);
+            }}
           />
         </PopoverHandler>
         <PopoverContent>
@@ -66,3 +66,4 @@ export default function CalendarElement() {
     </div>
   );
 }
+

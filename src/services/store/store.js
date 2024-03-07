@@ -7,7 +7,7 @@ import locationsReducer from "./slices/locationsSlice";
 import usersReducer from "./slices/usersSlice";
 import companiesReducer from "./slices/companiesSlice";
 import maintenancesReducer from "./slices/maintenancesSlice";
-import maintenanceTypesReducer from "./slices/mainetnanceTypesSlice";
+import maintenanceTypesReducer from "./slices/maintenanceTypesSlice";
 import tripsReducer from "./slices/tripsSlice";
 import attachmentsReducer from "./slices/attachmentsSlice";
 
@@ -24,3 +24,4 @@ export const store = configureStore({
     attachments: attachmentsReducer,
   }),
 });
+
