@@ -32,6 +32,10 @@ const TruckMaintenances = () => {
     dispatch(maintenancesSearch(query));
   }, [id]);
 
+  useEffect(() => {
+    console.log({ data, isLoading, error });
+  }, [data, isLoading, error]);
+
   return (
     <>
       {/* Page Titre */}

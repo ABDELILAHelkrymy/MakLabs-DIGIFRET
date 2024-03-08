@@ -15,10 +15,37 @@ const NotificationTrajet = () => {
 
   return (
     <>
+      {/* Page Titre */}
+      <div className="flex justify-between p-5 bg-white text-gray-700">
+        <ChevronLeftIcon
+          width="20px"
+          height="20px"
+          onClick={() => {
+            navigate("/garage-detail");
+          }}
+        />
+        <div className="">Liste des entretiens</div>
+        <PlusIcon
+          width="25px"
+          height="25px"
+          fill="#2eaa35"
+          onClick={() => {
+            navigate("/nouvelle-tache-entretien");
+          }}
+        />
+      </div>
       {/* Page Content  */}
       <div className="explore">
         <Card className="overflow-hidden">
           <CardBody>
+            <div>
+              <XMarkIcon
+                width="25px"
+                height="25px"
+                className="mb-5"
+                fill="#FF0000"
+              />
+            </div>
             <div className="flex items-center mb-5">
               <div>
                 <BanknotesIcon width="20px" height="20px" className="mr-2" />
@@ -82,4 +109,3 @@ const NotificationTrajet = () => {
   );
 };
 export default NotificationTrajet;
-
