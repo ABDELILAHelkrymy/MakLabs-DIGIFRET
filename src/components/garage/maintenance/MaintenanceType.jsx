@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { mainetnanceTypesGetById } from "../../../services/store/slices/mainetnanceTypesSlice";
+import { maintenanceTypesGetById } from "../../../services/store/slices/maintenanceTypesSlice";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 
 function MaintenanceType({ id, name }) {
@@ -25,3 +25,4 @@ function MaintenanceType({ id, name }) {
 }
 
 export default MaintenanceType;
+

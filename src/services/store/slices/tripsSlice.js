@@ -1,11 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addReducerApiCases } from "../../shared/reducerManager";
+import {
+  addReducerApiCases,
+  getDefaultInitialState,
+} from "../../shared/reducerManager";
 import {
   generateApiActions,
   generateExportedActions,
 } from "../../shared/actionsManager";
 
-const initialState = {};
+const apiInitialState = getDefaultInitialState();
+
+const initialState = {
+  ...apiInitialState,
+};
 
 const tripsApiActions = generateApiActions("trips");
 
