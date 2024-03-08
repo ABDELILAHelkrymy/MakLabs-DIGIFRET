@@ -30,6 +30,7 @@ import {
   MagnifyingGlassIcon,
   Bars3Icon,
   XMarkIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
@@ -66,12 +67,6 @@ export function SidebarWithBurgerMenu() {
               DIGIFRET
             </Typography>
           </div>
-          <div className="p-2">
-            <Input
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              label="Search"
-            />
-          </div>
           <List>
             <ListItem
               onClick={() => {
@@ -86,34 +81,14 @@ export function SidebarWithBurgerMenu() {
             <hr className="my-2 border-blue-gray-50" />
             <ListItem>
               <ListItemPrefix>
-                <InboxIcon className="h-5 w-5" />
+                <PhoneIcon className="h-5 w-5" />
               </ListItemPrefix>
-              Inbox
-              <ListItemSuffix>
-                <Chip
-                  value="14"
-                  size="sm"
-                  variant="ghost"
-                  color="blue-gray"
-                  className="rounded-full"
-                />
-              </ListItemSuffix>
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
-            <ListItem>
-              <ListItemPrefix>
-                <Cog6ToothIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Settings
+              Support
             </ListItem>
             <ListItem
               onClick={() => {
                 navigate("/logout");
+                closeDrawer();
               }}
             >
               <ListItemPrefix>
@@ -127,3 +102,4 @@ export function SidebarWithBurgerMenu() {
     </>
   );
 }
+
