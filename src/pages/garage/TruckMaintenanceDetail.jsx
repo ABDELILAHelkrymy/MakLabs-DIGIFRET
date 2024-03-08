@@ -29,6 +29,10 @@ const TruckMaintenanceDetail = () => {
   useEffect(() => {
     dispatch(maintenancesGetById(id));
   }, [id]);
+
+  useEffect(() => {
+    console.log(data.maintenance.maintenanceTypesId.name);
+  }, [data, isLoading, error]);
   return (
     <>
       {/* Page Header */}
@@ -97,4 +101,3 @@ const TruckMaintenanceDetail = () => {
 };
 
 export default TruckMaintenanceDetail;
-

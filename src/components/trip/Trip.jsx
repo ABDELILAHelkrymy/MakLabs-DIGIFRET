@@ -2,6 +2,8 @@ import { react } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   TruckIcon,
+  CalendarDaysIcon,
+  UserIcon,
   ArchiveBoxIcon,
   ArrowsUpDownIcon,
   ChevronDoubleRightIcon,
@@ -11,41 +13,33 @@ import {
 import {
   Card,
   CardBody,
+  CardFooter,
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
 
-const Trip = ({ id, description, destinationId, originId, truckname, status }) => {
+const Trip = (props) => {
   const navigate = useNavigate();
-  const CalcStatusColor = (status) => {
-    switch (status) {
-      case "pending":
-        return false;
-      case "resolved":
-        return true;
-      default:
-        return null;
-    }
-  };
+  const points = props.points;
   return (
     <Card className="mt-8">
       <CardHeader className="bg-purple-100 flex items-center">
         <Typography variant="small" color="blue-gray" className="p-2">
-          {description}
+          12 500 DHS - 348 Kms
         </Typography>
       </CardHeader>
       <CardBody>
         <div className="trajet flex justify-between ">
           <div className="trajet-content w-3/4">
             <div className="traget-direction mb-5">
-              <div>{originId}</div>
+              <div className="">{points.origin}</div>
               <ArrowsUpDownIcon width="20px" height="20px" />
-              <div>{destinationId}</div>
+              <div>{points.destination}</div>
             </div>
             <div className="flex justify-between text-xs items-center">
               <div className="traget-material flex items-center w-1/2">
                 <TruckIcon width="20px" height="20px" className="mr-2" />
-                <span>{truckname}</span>
+                <span>IVECO - 2015</span>
               </div>
               <div className="trajet-info flex items-center w-1/2">
                 <ArchiveBoxIcon width="20px" height="20px" className="mr-2" />
@@ -55,12 +49,11 @@ const Trip = ({ id, description, destinationId, originId, truckname, status }) =
           </div>
           <div className="actions flex flex-col justify-between">
             <div className="etat-trajet">
-              {CalcStatusColor(status) ?
-                (
-                  <PlayIcon width="25px" height="25px" fill="#2eaa35" />
-                ) : (
-                  <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" />
-                )}
+              {props.etat ? (
+                <PlayIcon width="25px" height="25px" fill="#2eaa35" />
+              ) : (
+                <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" />
+              )}
             </div>
             <div className="detail-trajet">
               <ChevronDoubleRightIcon
@@ -68,7 +61,7 @@ const Trip = ({ id, description, destinationId, originId, truckname, status }) =
                 height="20px"
                 onClick={() => {
                   navigate(
-                    `/trajet-detail/?origin=${originId}&destination=${destinationId}`
+                    `/trajet-detail/?origin=${points.origin}&destination=${points.destination}`
                   );
                 }}
               />
