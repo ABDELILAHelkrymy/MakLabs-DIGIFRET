@@ -12,6 +12,7 @@ const apiInitialState = getDefaultInitialState();
 
 const initialState = {
   ...apiInitialState,
+  newTripData: null,
 };
 
 const tripsApiActions = generateApiActions("trips");
@@ -19,7 +20,14 @@ const tripsApiActions = generateApiActions("trips");
 const tripsSlice = createSlice({
   name: "trips",
   initialState,
-  reducers: {},
+  reducers: {
+    editNewTripData: (state, action) => {
+      state.newTripData = {
+        ...state.newTripData,
+        ...action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     addReducerApiCases(builder, tripsApiActions);
   },
@@ -34,4 +42,7 @@ export const {
   tripsSearch,
 } = generateExportedActions("trips", tripsApiActions);
 
+export const { editNewTripData } = tripsSlice.actions;
+
 export default tripsSlice.reducer;
+

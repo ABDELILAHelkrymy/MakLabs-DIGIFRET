@@ -40,93 +40,88 @@ const TripDetailPage = () => {
         />
       </div>
       {/* Page Content  */}
-      <div className="explore">
-        <Card className="overflow-hidden rounded-t-none">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 rounded-none"
-          >
-            <Map origin={origineRef} destination={destinationRef} />
-          </CardHeader>
-          <CardBody>
-            <div className="trajet-detail flex justify-between items-end">
-              <div>
-                <div className="flex items-center">
-                  <IdentificationIcon
-                    width="20px"
-                    height="20px"
-                    className="mr-2"
-                  />
-                  <span className="font-bold">Rentabilité :</span>
-                </div>
-                <div>18 Kms à vide, 50 DHS/Km</div>
+      <Card className="overflow-hidden rounded-t-none">
+        <CardHeader
+          floated={false}
+          shadow={false}
+          color="transparent"
+          className="m-0 rounded-none"
+        >
+          <Map origin={origineRef} destination={destinationRef} />
+        </CardHeader>
+        <CardBody>
+          <div className="trajet-detail flex justify-between items-end">
+            <div>
+              <div className="flex items-center">
+                <IdentificationIcon
+                  width="20px"
+                  height="20px"
+                  className="mr-2"
+                />
+                <span className="font-bold">Rentabilité :</span>
               </div>
-              <ChevronDoubleRightIcon
-                width="20px"
-                height="20px"
-                className="mb-2"
-                onClick={() => {
-                  navigate("/retour-trajet");
-                }}
-              />
+              <div>18 Kms à vide, 50 DHS/Km</div>
             </div>
-            <div className="trajet-detail flex justify-between items-end">
-              <div>
-                <div className="flex items-center">
-                  <ArrowDownTrayIcon
-                    width="20px"
-                    height="20px"
-                    className="mr-2"
-                  />
-                  <span className="font-bold">Chargement :</span>
-                </div>
-                <div>12 AV Zerktouni - Casablanca</div>
+            <ChevronDoubleRightIcon
+              width="20px"
+              height="20px"
+              className="mb-2"
+              onClick={() => {
+                navigate("/retour-trajet");
+              }}
+            />
+          </div>
+          <div className="trajet-detail flex justify-between items-end">
+            <div>
+              <div className="flex items-center">
+                <ArrowDownTrayIcon
+                  width="20px"
+                  height="20px"
+                  className="mr-2"
+                />
+                <span className="font-bold">Chargement :</span>
               </div>
-              <ChevronDoubleRightIcon
-                width="20px"
-                height="20px"
-                className="mb-2"
-              />
+              <div>12 AV Zerktouni - Casablanca</div>
             </div>
-            <div className="trajet-detail flex justify-between items-end">
-              <div>
-                <div className="flex items-center">
-                  <ArrowUpTrayIcon
-                    width="20px"
-                    height="20px"
-                    className="mr-2"
-                  />
-                  <span className="font-bold">Déchargement :</span>
-                </div>
-                <div>302 BVD Moammed V - Agadir </div>
+            <ChevronDoubleRightIcon
+              width="20px"
+              height="20px"
+              className="mb-2"
+            />
+          </div>
+          <div className="trajet-detail flex justify-between items-end">
+            <div>
+              <div className="flex items-center">
+                <ArrowUpTrayIcon width="20px" height="20px" className="mr-2" />
+                <span className="font-bold">Déchargement :</span>
               </div>
-              <ChevronDoubleRightIcon
-                width="20px"
-                height="20px"
-                className="mb-2"
-              />
+              <div>302 BVD Moammed V - Agadir </div>
             </div>
-            <div className="trajet-detail flex justify-between items-end">
-              <div>
-                <div className="flex items-center">
-                  <ArchiveBoxIcon width="20px" height="20px" className="mr-2" />
-                  <span className="font-bold">Cargaison :</span>
-                </div>
-                <div>3.5 T, 40 Palettes</div>
+            <ChevronDoubleRightIcon
+              width="20px"
+              height="20px"
+              className="mb-2"
+            />
+          </div>
+          <div className="trajet-detail flex justify-between items-end">
+            <div>
+              <div className="flex items-center">
+                <ArchiveBoxIcon width="20px" height="20px" className="mr-2" />
+                <span className="font-bold">Cargaison :</span>
               </div>
-              <ChevronDoubleRightIcon
-                width="20px"
-                height="20px"
-                className="mb-2"
-              />
+              <div>3.5 T, 40 Palettes</div>
             </div>
-          </CardBody>
-        </Card>
-      </div>
+            <ChevronDoubleRightIcon
+              width="20px"
+              height="20px"
+              className="mb-2"
+            />
+          </div>
+        </CardBody>
+      </Card>
     </>
   );
 };
 
 export default TripDetailPage;
+

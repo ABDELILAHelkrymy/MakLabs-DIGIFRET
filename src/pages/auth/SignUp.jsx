@@ -63,16 +63,14 @@ const SignUP = () => {
             <div className="w-full py-4 px-8 z-0">
               <Stepper activeStep={activeStep} />
             </div>
-            {activeStep === 0 ? (
+            {activeStep === 0 && (
               <>
                 <AuthProvider />
                 <AuthForm />
               </>
-            ) : activeStep === 1 ? (
-              <ProfileInfoConfirme />
-            ) : (
-              <Role />
             )}
+            {activeStep === 1 && <ProfileInfoConfirme />}
+            {activeStep === 2 && <Role />}
           </Card>
         </main>
       </div>
@@ -81,3 +79,4 @@ const SignUP = () => {
 };
 
 export default SignUP;
+
