@@ -35,7 +35,7 @@ const TruckMaintenances = () => {
   return (
     <>
       {/* Page Titre */}
-      <div className="flex justify-between p-5 bg-white text-gray-700">
+      <div className="flex justify-between p-5 mb-3 bg-white text-gray-700">
         <ChevronLeftIcon
           width="20px"
           height="20px"
@@ -54,31 +54,29 @@ const TruckMaintenances = () => {
         />
       </div>
       {/* Page Content  */}
-      <div className="explore">
-        <Card className="overflow-hidden">
-          <CardBody className="text-center">
-            <div className="flex items-center pb-6">
-              <CalendarDaysIcon width="25px" height="25px" className="mr-2" />
-              <span className="font-bold">Maintenance et Entretien</span>
-            </div>
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <>
-                {data?.maintenances &&
-                  data.maintenances.map((maintenance) => (
-                    <MaintenanceType
-                      key={maintenance._id}
-                      id={maintenance._id}
-                      date={maintenance.date}
-                      name={maintenance.maintenanceTypesId.name}
-                    />
-                  ))}
-              </>
-            )}
-          </CardBody>
-        </Card>
-      </div>
+      <Card className="overflow-hidden">
+        <CardBody className="text-center">
+          <div className="flex items-center pb-6">
+            <CalendarDaysIcon width="25px" height="25px" className="mr-2" />
+            <span className="font-bold">Maintenance et Entretien</span>
+          </div>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              {data?.maintenances &&
+                data.maintenances.map((maintenance) => (
+                  <MaintenanceType
+                    key={maintenance._id}
+                    id={maintenance._id}
+                    date={maintenance.date}
+                    name={maintenance.maintenanceTypesId.name}
+                  />
+                ))}
+            </>
+          )}
+        </CardBody>
+      </Card>
     </>
   );
 };

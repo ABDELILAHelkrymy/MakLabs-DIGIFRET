@@ -29,14 +29,11 @@ import TruckUpdate from "../pages/garage/TruckUpdate";
 // trips routes
 import PilotageTrajet from "../pages/trips/PilotageTrajet";
 import NotificationTrajet from "../pages/trips/NotificationTrajet";
-import NouveauTrajet from "../pages/trips/NouveauTrajet";
 import RetourTrajet from "../pages/trips/RetourTrajet";
 import RetourTrajetDispo from "../pages/trips/RetourTrajetDispo";
-import NewTripStOne from "../pages/trips/NewTripStOne";
-import NewTripThTwo from "../pages/trips/NewTripThTwo";
-import NewTripRdThree from "../pages/trips/NewTripRdThree";
 import TripDetailPage from "../pages/trips/TripDetailPage";
 import TripsPage from "../pages/trips/TripsPage";
+import AddTrip from "../pages/trips/AddTrip";
 
 // client routes
 import Client from "../pages/client/Client";
@@ -71,13 +68,10 @@ const router = createBrowserRouter([
       { path: "nouveau-camion", element: <TruckNew /> },
       { path: "pilotage-trajet", element: <PilotageTrajet /> },
       { path: "notification-trajet", element: <NotificationTrajet /> },
-      { path: "new-trajet", element: <NouveauTrajet /> },
       { path: "update-truck", element: <TruckUpdate /> },
       { path: "retour-trajet", element: <RetourTrajet /> },
       { path: "retour-dispo", element: <RetourTrajetDispo /> },
-      { path: "new-trip-step1", element: <NewTripStOne /> },
-      { path: "new-trip-step2", element: <NewTripThTwo /> },
-      { path: "new-trip-step3", element: <NewTripRdThree /> },
+      { path: "add-trip", element: <AddTrip /> },
     ],
   },
 ]);

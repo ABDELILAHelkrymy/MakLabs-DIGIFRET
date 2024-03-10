@@ -30,7 +30,7 @@ const Header = () => {
           {navList}
         </div>
       </Navbar>
-      <MobileNav open={isNavOpen} className="z-10 absolute">
+      <MobileNav open={isNavOpen} className="z-10 top-10 fixed">
         <NavList />
       </MobileNav>
     </>
