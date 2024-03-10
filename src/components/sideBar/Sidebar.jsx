@@ -70,7 +70,8 @@ export function SidebarWithBurgerMenu() {
           <List>
             <ListItem
               onClick={() => {
-                navigate("/dashboard");
+                navigate("/pilotage-trajet");
+                closeDrawer();
               }}
             >
               <ListItemPrefix>
