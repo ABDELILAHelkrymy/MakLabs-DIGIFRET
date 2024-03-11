@@ -10,8 +10,10 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody, Button } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
+import { useParams } from "react-router-dom";
 
 const FuelBalance = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const chartConfig = {
     type: "pie",
@@ -45,7 +47,7 @@ const FuelBalance = () => {
           width="20px"
           height="20px"
           onClick={() => {
-            navigate("/garage-detail");
+            navigate(`/garage-detail/${id}`);
           }}
         />
         <div className="">Bilan carbone</div>
@@ -133,3 +135,4 @@ const FuelBalance = () => {
 };
 
 export default FuelBalance;
+

@@ -35,6 +35,9 @@ import TripDetailPage from "../pages/trips/TripDetailPage";
 import TripsPage from "../pages/trips/TripsPage";
 import AddTrip from "../pages/trips/AddTrip";
 
+// upload route
+import UploadPage from "../pages/UploadPage";
+
 // client routes
 import Client from "../pages/client/Client";
 
@@ -64,7 +67,10 @@ const router = createBrowserRouter([
       { path: "/private-policy", element: <PrivatePolicy /> },
       { path: "/success", element: <SuccesPage /> },
       { path: "client", element: <Client /> },
-      { path: "nouvelle-tache-entretien", element: <TruckMaintenanceNew /> },
+      {
+        path: "nouvelle-tache-entretien/:id",
+        element: <TruckMaintenanceNew />,
+      },
       { path: "nouveau-camion", element: <TruckNew /> },
       { path: "pilotage-trajet", element: <PilotageTrajet /> },
       { path: "notification-trajet", element: <NotificationTrajet /> },
@@ -72,6 +78,7 @@ const router = createBrowserRouter([
       { path: "retour-trajet", element: <RetourTrajet /> },
       { path: "retour-dispo", element: <RetourTrajetDispo /> },
       { path: "add-trip", element: <AddTrip /> },
+      { path: "upload", element: <UploadPage /> },
     ],
   },
 ]);
