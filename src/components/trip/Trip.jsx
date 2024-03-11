@@ -15,7 +15,16 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-const Trip = ({ id, description, destinationId, originId, truckname, status }) => {
+const Trip = ({
+  id,
+  description,
+  destinationId,
+  originId,
+  truckname,
+  status,
+  price,
+  distance,
+}) => {
   const navigate = useNavigate();
   const CalcStatusColor = (status) => {
     switch (status) {
@@ -31,7 +40,7 @@ const Trip = ({ id, description, destinationId, originId, truckname, status }) =
     <Card className="mt-8">
       <CardHeader className="bg-purple-100 flex items-center">
         <Typography variant="small" color="blue-gray" className="p-2">
-          {description}
+          {price} - {distance}
         </Typography>
       </CardHeader>
       <CardBody>
@@ -55,12 +64,11 @@ const Trip = ({ id, description, destinationId, originId, truckname, status }) =
           </div>
           <div className="actions flex flex-col justify-between">
             <div className="etat-trajet">
-              {CalcStatusColor(status) ?
-                (
-                  <PlayIcon width="25px" height="25px" fill="#2eaa35" />
-                ) : (
-                  <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" />
-                )}
+              {CalcStatusColor(status) ? (
+                <PlayIcon width="25px" height="25px" fill="#2eaa35" />
+              ) : (
+                <PlayPauseIcon width="25px" height="25px" fill="#f8a72f" />
+              )}
             </div>
             <div className="detail-trajet">
               <ChevronDoubleRightIcon
@@ -80,3 +88,4 @@ const Trip = ({ id, description, destinationId, originId, truckname, status }) =
   );
 };
 export default Trip;
+
