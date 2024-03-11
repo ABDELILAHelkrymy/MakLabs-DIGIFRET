@@ -3,19 +3,22 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { maintenancesGetById } from "../../services/store/slices/maintenancesSlice";
+import { attachmentsSearch } from "../../services/store/slices/attachmentsSlice";
 import {
   ChevronLeftIcon,
   ArrowUpTrayIcon,
+  ArrowDownTrayIcon,
   CalendarDaysIcon,
   PencilSquareIcon,
   MapIcon,
 } from "@heroicons/react/24/solid";
 import { Card, CardBody } from "@material-tailwind/react";
+import { handleDownload } from "../../utils/download";
 
 // function to transform date like 2025-01-01T00:00:00.000Z to 01/01/2025
 const transformDate = (date) => {
   const d = new Date(date);
-  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+  return `${d.getDate()}/${d.getMonth() + 1}`;
 };
 
 const TruckMaintenanceDetail = () => {
@@ -25,10 +28,22 @@ const TruckMaintenanceDetail = () => {
   const { data, isLoading, error } = useSelector(
     (state) => state.maintenances?.getById
   );
+  const attachments = useSelector((state) => state.attachments?.search);
 
   useEffect(() => {
     dispatch(maintenancesGetById(id));
   }, [id]);
+
+  useEffect(() => {
+    const query = [
+      {
+        field: "entity",
+        value: id,
+      },
+    ];
+    dispatch(attachmentsSearch(query));
+  }, [dispatch, id]);
+
   return (
     <>
       {/* Page Header */}
@@ -78,9 +93,21 @@ const TruckMaintenanceDetail = () => {
                 <ArrowUpTrayIcon width="25px" height="25px" className="mr-2" />
                 <span>Documents :</span>
               </div>
-              <p className="text-left">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+              <p className="w-full">
+                {attachments &&
+                  attachments?.data?.attachments?.map((attachment) => (
+                    <div className="flex justify-between p-2">
+                      <div className="text-right">{attachment.name}</div>
+                      <div className="text-right">
+                        <ArrowDownTrayIcon
+                          width="25px"
+                          height="25px"
+                          fill="#2eaa35"
+                          onClick={() => handleDownload(attachment)}
+                        />
+                      </div>
+                    </div>
+                  ))}
               </p>
             </div>
           </div>

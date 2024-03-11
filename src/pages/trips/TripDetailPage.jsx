@@ -66,9 +66,6 @@ const TripDetailPage = () => {
               width="20px"
               height="20px"
               className="mb-2"
-              onClick={() => {
-                navigate("/retour-trajet");
-              }}
             />
           </div>
           <div className="trajet-detail flex justify-between items-end">

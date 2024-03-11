@@ -9,6 +9,7 @@ import {
   tripsCreate,
 } from "../../services/store/slices/tripsSlice";
 import { trucksGetAll } from "../../services/store/slices/trucksSlice";
+import { usersGetAll } from "../../services/store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ArrowDownTrayIcon,
@@ -55,6 +56,7 @@ const AddTrip = () => {
   const newTripData = useSelector((state) => state.trips?.newTripData);
   const newLocation = useSelector((state) => state.locations?.create);
   const trucks = useSelector((state) => state.trucks?.getAll);
+  const users = useSelector((state) => state.users?.getAll?.data?.users);
 
   const [activeStep, setActiveStep] = useState(0);
   const [open, setOpen] = useState(0);
@@ -75,6 +77,7 @@ const AddTrip = () => {
     noPallets: "",
     description: "description du trajet",
     truckId: "",
+    responsible: "",
   });
 
   const dispatch = useDispatch();
@@ -92,6 +95,10 @@ const AddTrip = () => {
 
   useEffect(() => {
     dispatch(trucksGetAll());
+  }, []);
+
+  useEffect(() => {
+    dispatch(usersGetAll());
   }, []);
 
   useEffect(() => {
@@ -363,7 +370,7 @@ const AddTrip = () => {
                       }
                     />
                   </div>
-                  <div className="pt-5 pb-5">
+                  <div className="py-3 px-3">
                     {trucks.data && (
                       <Select
                         variant="standard"
@@ -377,6 +384,28 @@ const AddTrip = () => {
                         {trucks?.data?.trucks?.map((truck, index) => (
                           <Option key={index} value={truck._id}>
                             {truck.brand}
+                          </Option>
+                        ))}
+                      </Select>
+                    )}
+                  </div>
+                  <div className="p-3">
+                    {users && (
+                      <Select
+                        variant="standard"
+                        label="Séléctionner un chauffeur"
+                        name="responsible"
+                        onChange={(e) =>
+                          setDetailsFormData({
+                            ...detailsFormData,
+                            responsible: e,
+                          })
+                        }
+                        className="overflow-y-scroll h-fit-content"
+                      >
+                        {users?.map((user, index) => (
+                          <Option key={index} value={user._id}>
+                            {user.fullname}
                           </Option>
                         ))}
                       </Select>

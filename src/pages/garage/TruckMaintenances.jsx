@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ChevronLeftIcon,
-  ChevronDoubleRightIcon,
   CalendarDaysIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
@@ -24,13 +23,13 @@ const TruckMaintenances = () => {
 
   const query = [
     {
-      key: "truckId",
+      field: "truckId",
       value: id,
     },
   ];
   useEffect(() => {
     dispatch(maintenancesSearch(query));
-  }, [id]);
+  }, []);
 
   return (
     <>
@@ -49,7 +48,7 @@ const TruckMaintenances = () => {
           height="25px"
           fill="#2eaa35"
           onClick={() => {
-            navigate("/nouvelle-tache-entretien");
+            navigate(`/nouvelle-tache-entretien/${id}`);
           }}
         />
       </div>

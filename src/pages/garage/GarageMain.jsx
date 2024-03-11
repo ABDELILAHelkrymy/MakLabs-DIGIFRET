@@ -12,8 +12,8 @@ import Spinner from "../../components/spinner/Spinner";
 import { set } from "date-fns";
 
 const GarageMain = () => {
+  const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
-  const [searchData, setSearchData] = useState("");
   const { authData } = useSelector((state) => state.auth);
   const { data, isLoading, error } = useSelector(
     (state) => state.trucks?.getAll
@@ -22,13 +22,6 @@ const GarageMain = () => {
   const trucksSearchData = useSelector((state) => state.trucks?.search);
 
   const [truckData, setTruckData] = useState([]);
-
-  const query = [
-    {
-      key: "brand",
-      value: searchData,
-    },
-  ];
 
   const navigate = useNavigate();
 
@@ -42,11 +35,44 @@ const GarageMain = () => {
     }
   }, [data]);
 
+  const getDefaultData = () => {
+    if (data?.trucks) {
+      setTruckData(data?.trucks);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    if (e.target.value === "") {
+      getDefaultData();
+    } else {
+      setSearchInput(e.target.value);
+    }
+  };
+
   useEffect(() => {
     if (trucksSearchData?.data) {
-      console.log(trucksSearchData?.data?.trucks);
+      setTruckData(trucksSearchData?.data?.trucks);
     }
   }, [trucksSearchData]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    console.log("searchInput", searchInput);
+    if (searchInput === "") {
+      getDefaultData();
+    } else {
+      dispatch(
+        trucksSearch([
+          {
+            field: "brand",
+            value: searchInput,
+            operator: "regex",
+          },
+        ])
+      );
+      setSearchInput(""); // clear the search input
+    }
+  };
 
   if (error) {
     const errorMessage =
@@ -59,45 +85,45 @@ const GarageMain = () => {
   return (
     <>
       <p className="pageHeader">Garage</p>
-      <form class="max-w-md mx-auto">
-        <label
-          for="default-search"
-          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Trouver un camion
-        </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              class="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+      <div class="max-w-md mx-auto">
+        <form onSubmit={handleSearch}>
+          <div
+            class="flex items-center max-w-md mx-auto bg-white rounded-lg "
+            x-data="{ search: '' }"
+          >
+            <div class="w-full">
+              <input
+                type="search"
+                class="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                placeholder="search"
+                x-model="search"
+                onChange={handleSearchChange}
               />
-            </svg>
+            </div>
+            <div>
+              <button
+                type="submit"
+                class="flex items-center bg-blue-500 justify-center w-12 h-12 text-white rounded-r-lg"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
           </div>
-          <input
-            type="search"
-            id="default-search"
-            class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Trouver un camion"
-            onChange={(e) => {
-              e.preventDefault();
-              setSearchData(e.target.value);
-              dispatch(trucksSearch(query));
-              setTruckData(trucksSearchData?.data?.trucks);
-            }}
-          />
-        </div>
-      </form>
+        </form>
+      </div>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -109,6 +135,12 @@ const GarageMain = () => {
                 : "Aucun camion dans le garage"}
             </p>
           )}
+
+          {truckData.length === 0 &&
+            trucksSearchData &&
+            trucksSearchData?.data?.trucks?.length === 0 && (
+              <p className="text-center">Not found</p>
+            )}
           {truckData &&
             truckData.map(({ _id, status, brand, dateOfCirculation }) => (
               <GarageTruck

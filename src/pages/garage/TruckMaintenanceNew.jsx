@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { maintenancesCreate } from "../../services/store/slices/maintenancesSlice";
+import {
+  maintenancesCreate,
+  clearMaintenance,
+} from "../../services/store/slices/maintenancesSlice";
 import { maintenanceTypesGetAll } from "../../services/store/slices/maintenanceTypesSlice";
 import { usersGetAll } from "../../services/store/slices/usersSlice";
 import { Select, Option, Checkbox, Spinner } from "@material-tailwind/react";
@@ -16,6 +19,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody, Button, Input } from "@material-tailwind/react";
 import CalendarElement from "../../components/CalendarElement";
+import Upload from "../../components/upload/Upload";
 import toast, { Toaster } from "react-hot-toast";
 
 const TruckMaintenanceNew = () => {
@@ -40,14 +44,16 @@ const TruckMaintenanceNew = () => {
   });
 
   React.useEffect(() => {
+    dispatch(clearMaintenance());
     dispatch(usersGetAll());
     dispatch(maintenanceTypesGetAll());
-  }, [dispatch]);
-
+  }, []);
   React.useEffect(() => {
     if (data) {
       toast.success("Nouvelle tâche d'entretien créée avec succès");
-      navigate(`/entretien-garage/${currentTruck?.data?.truck?._id}`);
+      navigate(
+        `/upload/?entity=${data.maintenance._id}&entityName=maintenances&redirect=/entretien-garage/${currentTruck?.data?.truck?._id}`
+      );
     } else if (error) {
       toast.error("Erreur lors de la création de la tâche d'entretien");
     }
@@ -77,7 +83,7 @@ const TruckMaintenanceNew = () => {
           height="25px"
           fill="#000"
           onClick={() => {
-            navigate("/entretien-garage");
+            navigate(`/entretien-garage/${currentTruck?.data?.truck?._id}`);
           }}
         />
       </div>
@@ -168,16 +174,6 @@ const TruckMaintenanceNew = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="flex flex-col mb-5 border-t-[2px]">
-              <div className="font-bold flex items-center  pb-2 pt-2">
-                <ArrowUpTrayIcon width="25px" height="25px" className="mr-2" />
-                <span>Documents :</span>
-              </div>
-              <p className="text-left">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </p>
             </div>
             <Button
               type="submit"

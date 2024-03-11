@@ -1,18 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addReducerApiCases } from "../../shared/reducerManager";
+import {
+  addReducerApiCases,
+  getDefaultInitialState,
+} from "../../shared/reducerManager";
 import {
   generateApiActions,
   generateExportedActions,
 } from "../../shared/actionsManager";
 
-const initialState = {};
+const apiInitialState = getDefaultInitialState();
+
+const initialState = {
+  ...apiInitialState,
+};
 
 const attachmentsApiActions = generateApiActions("attachments");
 
 const attachmentsSlice = createSlice({
   name: "attachments",
   initialState,
-  reducers: {},
+  reducers: {
+    clearAttachment: (state) => {
+      state.create.data = null;
+    },
+  },
   extraReducers: (builder) => {
     addReducerApiCases(builder, attachmentsApiActions);
   },
@@ -27,4 +38,7 @@ export const {
   attachmentsSearch,
 } = generateExportedActions("attachments", attachmentsApiActions);
 
+export const { clearAttachment } = attachmentsSlice.actions;
+
 export default attachmentsSlice.reducer;
+

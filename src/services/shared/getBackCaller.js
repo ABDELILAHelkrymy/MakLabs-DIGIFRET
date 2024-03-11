@@ -4,6 +4,9 @@ const api_url = process.env.REACT_APP_BACKEND_URL;
 
 const getBackCaller = (module, ressource = "", version = "v1") => {
   return async (opts = {}) => {
+    let headerContentType = {
+      "content-type": "application/json",
+    };
     const authData = localStorage.getItem("authData");
     let token = authData ? JSON.parse(authData).token : "";
     let reqUrl = `${api_url}/${module}/${version}`;
@@ -11,12 +14,21 @@ const getBackCaller = (module, ressource = "", version = "v1") => {
     if (opts.action) reqUrl += `/${opts.action}`;
     if (opts.id) reqUrl += `/${opts.id}`;
     if (opts.query) reqUrl += `?${new URLSearchParams(opts.query).toString()}`;
+    console.log(ressource);
+
+    if (
+      ressource === "attachments" &&
+      opts.method === "POST" &&
+      opts.action !== "search"
+    ) {
+      headerContentType["content-type"] = "multipart/form-data";
+    }
 
     try {
       const response = await axios(reqUrl, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "content-type": "application/json",
+          ...headerContentType,
           ...opts.headers,
         },
         withCredentials: false,

@@ -19,7 +19,11 @@ const maintenancesApiActions = generateApiActions("maintenances");
 const maintenancesSlice = createSlice({
   name: "maintenances",
   initialState,
-  reducers: {},
+  reducers: {
+    clearMaintenance: (state) => {
+      state.create.data = null;
+    },
+  },
   extraReducers: (builder) => {
     addReducerApiCases(builder, maintenancesApiActions);
   },
@@ -34,4 +38,7 @@ export const {
   maintenancesSearch,
 } = generateExportedActions("maintenances", maintenancesApiActions);
 
+export const { clearMaintenance } = maintenancesSlice.actions;
+
 export default maintenancesSlice.reducer;
+
