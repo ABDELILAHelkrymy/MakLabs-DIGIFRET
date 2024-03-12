@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   locationsGetAll,
@@ -31,6 +31,7 @@ import {
 
 import Stepper from "../../components/stepper/Stepper";
 import CalendarElement from "../../components/CalendarElement";
+import AutocompleteInput from "../../components/AutocompleteInput";
 
 function Icon({ id, open }) {
   return (
@@ -52,6 +53,7 @@ function Icon({ id, open }) {
 }
 
 const AddTrip = () => {
+  const inputRef = useRef(null);
   const authData = useSelector((state) => state.auth?.authData);
   const newTripData = useSelector((state) => state.trips?.newTripData);
   const newLocation = useSelector((state) => state.locations?.create);
@@ -175,6 +177,7 @@ const AddTrip = () => {
       dispatch(tripsCreate(tripData));
       navigate("/trajets");
     }
+    if (inputRef.current) inputRef.current.value = "";
     setAdress({
       address: "",
       phone: "",
@@ -194,6 +197,7 @@ const AddTrip = () => {
       setDestinationId(e);
     }
   };
+
   return (
     <>
       {/* Page Titre */}
@@ -252,9 +256,9 @@ const AddTrip = () => {
                   <div className="list-element p-5">
                     <div className="pt-5 pb-5">
                       <Input
-                        name="address"
-                        label="address"
-                        value={adress.address}
+                        name="name"
+                        label="nom de l'adresse"
+                        value={adress.name}
                         onChange={handleChange}
                       />
                     </div>
@@ -275,12 +279,22 @@ const AddTrip = () => {
                       />
                     </div>
                     <div className="pt-5 pb-5">
-                      <Input
-                        name="name"
-                        label="Adresse portable"
-                        value={adress.name}
-                        onChange={handleChange}
+                      <AutocompleteInput
+                        ref={inputRef}
+                        address={adress.address}
+                        setAddress={(e) => {
+                          setAdress({
+                            ...adress,
+                            address: e,
+                          });
+                        }}
                       />
+                      {/* <Input
+                        name="address"
+                        label="Adresse"
+                        value={adress.address}
+                        onChange={handleChange}
+                      /> */}
                     </div>
                   </div>
                 </AccordionBody>

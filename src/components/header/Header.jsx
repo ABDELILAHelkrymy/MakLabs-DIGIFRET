@@ -13,6 +13,18 @@ const Header = () => {
   const { authData, isLoading } = useSelector((state) => state.auth);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
+  //handle click outside
+  const handleClickOutside = () => {
+    setIsNavOpen(false);
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+
   const navList = (
     <ul className="my-2 flex justify-between lg:mb-0 lg:mt-0 flex-row w-full">
       {authData?.user?.isCompleted && <SidebarWithBurgerMenu />}
@@ -44,4 +56,3 @@ const Header = () => {
 };
 
 export default Header;
-

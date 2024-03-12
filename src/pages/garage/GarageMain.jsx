@@ -142,15 +142,18 @@ const GarageMain = () => {
               <p className="text-center">Not found</p>
             )}
           {truckData &&
-            truckData.map(({ _id, status, brand, dateOfCirculation }) => (
-              <GarageTruck
-                key={_id}
-                id={_id}
-                status={status}
-                brand={brand}
-                dateCirculation={dateOfCirculation}
-              />
-            ))}
+            truckData.map(
+              ({ _id, status, brand, dateOfCirculation, nRegistration }) => (
+                <GarageTruck
+                  key={_id}
+                  id={_id}
+                  status={status}
+                  brand={brand}
+                  dateCirculation={dateOfCirculation}
+                  nRegistration={nRegistration}
+                />
+              )
+            )}
         </>
       )}
       {authData?.user?.role === "transporter" && (
@@ -170,4 +173,3 @@ const GarageMain = () => {
 };
 
 export default GarageMain;
-
