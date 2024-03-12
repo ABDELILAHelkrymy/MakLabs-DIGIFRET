@@ -1,5 +1,5 @@
 export const handleDownload = async (attachment) => {
-  const baseUrl = process.env.REACT_APP_API_URL;
+  const baseUrl = process.env.REACT_APP_BACKEND_URL;
   const token = localStorage.getItem("token");
   if (!attachment._id) return;
   console.log("Downloading file", attachment._id);
@@ -28,4 +28,3 @@ const downloadFile = async (response, name, extension) => {
   link.click();
   link.parentNode.removeChild(link);
 };
-

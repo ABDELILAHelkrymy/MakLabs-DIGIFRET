@@ -15,7 +15,10 @@ import {
   Input,
   Typography,
   Button,
+  Select,
+  Option,
 } from "@material-tailwind/react";
+import CalendarElement from "../../components/CalendarElement";
 
 const TruckNew = () => {
   const { data, isLoading, error } = useSelector(
@@ -90,6 +93,10 @@ const TruckNew = () => {
     }
   }, [data, error]);
 
+  const handleSelectChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e });
+  };
+
   return (
     <>
       <Toaster />
@@ -156,19 +163,105 @@ const TruckNew = () => {
             </div>
             <div className="mt-5">
               {Object.keys(InputFrNames).map((key) => (
-                <div className="flex items-center justify-between mb-5">
-                  <Input
-                    key={key}
-                    type="text"
-                    id={key}
-                    name={key}
-                    value={formData[key]}
-                    label={InputFrNames[key]}
-                    onChange={handleChange}
-                    fullWidth
-                    className="w-1/2"
-                  />
-                </div>
+                <>
+                  {key === "purchaseType" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, purchaseType: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Credit">Credit</Option>
+                        <Option value="Leasing">Leasing</Option>
+                        <Option value="Especes">Especes</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "specific" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, specific: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Tracteur">Tracteur</Option>
+                        <Option value="Routier">Routier</Option>
+                        <Option value="Frigo">Frigo</Option>
+                        <Option value="Bache">Bache</Option>
+                        <Option value="Plateau">Plateau</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "fuel" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, fuel: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Diesel">Diesel</Option>
+                        <Option value="Essence">Essence</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "dateOfCirculation" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <CalendarElement
+                        label="Date de Mise en"
+                        name="date"
+                        date={formData[key]}
+                        setDate={(e) => {
+                          setFormData({
+                            ...formData,
+                            dateOfCirculation: e,
+                          });
+                        }}
+                      />
+                    </div>
+                  )}
+                  {key !== "purchaseType" &&
+                    key !== "specific" &&
+                    key !== "fuel" &&
+                    key !== "dateOfCirculation" && (
+                      <div className="flex items-center justify-between mb-5">
+                        <Input
+                          variant="outline"
+                          key={key}
+                          id={key}
+                          name={key}
+                          value={formData[key]}
+                          label={InputFrNames[key]}
+                          onChange={handleChange}
+                          fullWidth
+                          className="w-1/2"
+                        />
+                      </div>
+                    )}
+                </>
               ))}
             </div>
             <Button

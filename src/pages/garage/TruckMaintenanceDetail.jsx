@@ -52,7 +52,7 @@ const TruckMaintenanceDetail = () => {
           width="20px"
           height="20px"
           onClick={() => {
-            navigate(`/entretien-garage/${id}`);
+            navigate(`/entretien-garage/${data?.maintenance?.truckId}`);
           }}
         />
         <div className="">Détail d'entretien</div>

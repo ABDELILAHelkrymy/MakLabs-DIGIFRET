@@ -21,7 +21,7 @@ import {
 } from "@material-tailwind/react";
 import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 
-const GarageTruck = ({ id, status, brand, dateCirculation }) => {
+const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   const navigate = useNavigate();
 
   // get the year based on date like that "2018-01-02T00:00:00.000Z"
@@ -46,7 +46,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation }) => {
     <Card className="mt-8">
       <CardHeader className="bg-purple-100 flex items-center">
         <Typography variant="small" color="blue-gray" className="p-2">
-          {brand} - {getYear(dateCirculation)}
+          {brand} - {nRegistration} - {getYear(dateCirculation)}
         </Typography>
       </CardHeader>
       <CardBody>

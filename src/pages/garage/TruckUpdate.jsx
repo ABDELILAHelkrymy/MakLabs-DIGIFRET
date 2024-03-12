@@ -11,6 +11,8 @@ import {
   CardBody,
   CardHeader,
   Input,
+  Option,
+  Select,
   Typography,
 } from "@material-tailwind/react";
 import {
@@ -20,6 +22,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Spinner from "../../components/spinner/Spinner";
 import toast, { Toaster } from "react-hot-toast";
+import CalendarElement from "../../components/CalendarElement";
 
 const TruckUpdate = () => {
   const dispatch = useDispatch();
@@ -106,6 +109,11 @@ const TruckUpdate = () => {
     return <Spinner />;
   }
 
+  // get the year based on date like that "2018-01-02T00:00:00.000Z"
+  const getYear = (date) => {
+    return new Date(date).getFullYear();
+  };
+
   return (
     <>
       <Toaster />
@@ -129,8 +137,8 @@ const TruckUpdate = () => {
       <Card className="mt-8">
         <CardHeader className="bg-purple-100 flex items-center">
           <Typography variant="small" color="blue-gray" className="p-2">
-            {`${data?.truck?.brand} - ${data?.truck?.nRegistration}` ||
-              "Camion"}
+            {formData.brand} - {formData.nRegistration} -{" "}
+            {getYear(formData.dateOfCirculation)}
           </Typography>
         </CardHeader>
         <CardBody>
@@ -171,19 +179,105 @@ const TruckUpdate = () => {
             </div>
             <div className="mt-5">
               {Object.keys(InputFrNames).map((key) => (
-                <div className="flex items-center justify-between mb-5">
-                  <Input
-                    key={key}
-                    type="text"
-                    id={key}
-                    name={key}
-                    value={formData[key]}
-                    label={InputFrNames[key]}
-                    onChange={handleChange}
-                    fullWidth
-                    className="w-1/2"
-                  />
-                </div>
+                <>
+                  {key === "purchaseType" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, purchaseType: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Credit">Credit</Option>
+                        <Option value="Leasing">Leasing</Option>
+                        <Option value="Especes">Especes</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "specific" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, specific: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Tracteur">Tracteur</Option>
+                        <Option value="Routier">Routier</Option>
+                        <Option value="Frigo">Frigo</Option>
+                        <Option value="Bache">Bache</Option>
+                        <Option value="Plateau">Plateau</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "fuel" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <Select
+                        variant="standard"
+                        key={key}
+                        id={key}
+                        name={key}
+                        value={formData[key]}
+                        label={InputFrNames[key]}
+                        onChange={(e) => {
+                          setFormData({ ...formData, fuel: e });
+                        }}
+                        fullWidth
+                        className="w-1/2"
+                      >
+                        <Option value="Diesel">Diesel</Option>
+                        <Option value="Essence">Essence</Option>
+                      </Select>
+                    </div>
+                  )}
+                  {key === "dateOfCirculation" && (
+                    <div className="flex items-center justify-between mb-5 mx-2">
+                      <CalendarElement
+                        label="Date de Mise en"
+                        name="date"
+                        date={formData[key]}
+                        setDate={(e) => {
+                          setFormData({
+                            ...formData,
+                            dateOfCirculation: e,
+                          });
+                        }}
+                      />
+                    </div>
+                  )}
+                  {key !== "purchaseType" &&
+                    key !== "specific" &&
+                    key !== "fuel" &&
+                    key !== "dateOfCirculation" && (
+                      <div className="flex items-center justify-between mb-5">
+                        <Input
+                          variant="outline"
+                          key={key}
+                          id={key}
+                          name={key}
+                          value={formData[key]}
+                          label={InputFrNames[key]}
+                          onChange={handleChange}
+                          fullWidth
+                          className="w-1/2"
+                        />
+                      </div>
+                    )}
+                </>
               ))}
             </div>
             <Button
