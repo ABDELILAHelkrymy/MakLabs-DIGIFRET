@@ -18,7 +18,7 @@ const SignUP = () => {
 
   useEffect(() => {
     if (authData) {
-      if (authData.user.isCompleted) {
+      if (authData?.user?.isCompleted) {
         navigate("/garage");
       } else {
         dispatch(
