@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeftIcon, ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import Trip from "../../components/trip/Trip";
 
 const TruckTrips = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -13,7 +14,7 @@ const TruckTrips = () => {
           width="20px"
           height="20px"
           onClick={() => {
-            navigate("/garage-detail");
+            navigate(`/garage-detail/${id}`);
           }}
         />
         <div className="">Liste des trajets</div>
