@@ -14,7 +14,6 @@ const getBackCaller = (module, ressource = "", version = "v1") => {
     if (opts.action) reqUrl += `/${opts.action}`;
     if (opts.id) reqUrl += `/${opts.id}`;
     if (opts.query) reqUrl += `?${new URLSearchParams(opts.query).toString()}`;
-    console.log(ressource);
 
     if (
       ressource === "attachments" &&
@@ -34,10 +33,10 @@ const getBackCaller = (module, ressource = "", version = "v1") => {
         withCredentials: false,
         ...opts,
       });
-      console.log(
-        `${module} -> ${opts.method} -> ${reqUrl} -> response.data`,
-        response.data
-      );
+      // console.log(
+      //   `${module} -> ${opts.method} -> ${reqUrl} -> response.data`,
+      //   response.data
+      // );
       localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (err) {
