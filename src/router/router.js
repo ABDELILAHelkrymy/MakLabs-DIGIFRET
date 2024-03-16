@@ -34,6 +34,7 @@ import RetourTrajetDispo from "../pages/trips/RetourTrajetDispo";
 import TripDetailPage from "../pages/trips/TripDetailPage";
 import TripsPage from "../pages/trips/TripsPage";
 import AddTrip from "../pages/trips/AddTrip";
+import PrivacyPage from "../pages/privacyPage";
 
 // upload route
 import UploadPage from "../pages/UploadPage";
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
       { path: "retour-dispo", element: <RetourTrajetDispo /> },
       { path: "add-trip", element: <AddTrip /> },
       { path: "upload", element: <UploadPage /> },
+      { path: "privacy", element: <PrivacyPage /> },
     ],
   },
 ]);
