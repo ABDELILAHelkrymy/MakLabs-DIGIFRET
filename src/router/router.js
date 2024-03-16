@@ -8,6 +8,7 @@ import ErrorPage from "../pages/ErrorPage";
 
 // components routes
 import ProviderCallback from "../components/ProviderCallback";
+import FacebookCallback from "../components/FacebookCallback";
 
 // auth routes
 import SignIn from "../pages/auth/SignIn";
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
         element: <TruckMaintenanceDetail />,
       },
       { path: "/auth/google/callback", element: <ProviderCallback /> },
+      { path: "/auth/facebook/callback", element: <FacebookCallback /> },
       { path: "/private-policy", element: <PrivatePolicy /> },
       { path: "/success", element: <SuccesPage /> },
       { path: "client", element: <Client /> },
