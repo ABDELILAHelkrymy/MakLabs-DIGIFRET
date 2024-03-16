@@ -21,4 +21,5 @@ Here's how to install and set up the project:
   ## Static pages:
   * dashboard
   * Bilan carbon
-  * and some information related to grage truck and trip 
+  * and some information related to grage truck and trip
+  * Trajet de retour not working
