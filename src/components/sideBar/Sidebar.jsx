@@ -35,6 +35,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export function SidebarWithBurgerMenu() {
+  const phoneNumber = process.env.REACT_APP_PHONE_NUMBER;
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(0);
   const [openAlert, setOpenAlert] = React.useState(true);
@@ -84,7 +85,14 @@ export function SidebarWithBurgerMenu() {
               <ListItemPrefix>
                 <PhoneIcon className="h-5 w-5" />
               </ListItemPrefix>
-              Support
+              {/* add phone whatssap and redirect the user directly to whatssap */}
+              <a
+                href={`https://wa.me/${phoneNumber}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                support
+              </a>
             </ListItem>
             <ListItem
               onClick={() => {
