@@ -14,6 +14,8 @@ Here's how to install and set up the project:
 
   Create yu google map key api and copy it here:
   REACT_APP_GOOGLE_MAPS_API_KEY = "AIzaSyAcTv6LfnaFX8--nV1KiYfIqcClUIFI9aM"
+
+  Add you your phone number for whatssap support : REACT_APP_PHONE_NUMBER = +XXXXXXXXXXXX
   
 * Create a repo in your github or fork this repo
 * and then use it in your own server (prefer to use vercel or netlify for react app deployment friendly)
