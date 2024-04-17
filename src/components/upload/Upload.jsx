@@ -25,7 +25,6 @@ export default function Upload({ entity, entityName, redirect }) {
   };
 
   const handleUpload = async () => {
-    console.log("Uploading file", file);
     if (!file) return;
     const formData = new FormData();
     formData.append("entity", entity);
