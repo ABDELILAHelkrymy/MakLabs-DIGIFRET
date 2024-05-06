@@ -1,5 +1,7 @@
-import { react } from "react";
+import { react, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { attachmentsSearch } from "../../../services/store/slices/attachmentsSlice";
 import {
   TruckIcon,
   CalendarDaysIcon,
@@ -23,6 +25,7 @@ import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 
 const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // get the year based on date like that "2018-01-02T00:00:00.000Z"
   const getYear = (date) => {
@@ -41,6 +44,20 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
         return "bg-gray-200";
     }
   };
+
+  useEffect(() => {
+    const query = [
+      {
+        field: "entity",
+        value: id,
+      },
+      {
+        field: "type",
+        value: "truck-logo",
+      },
+    ];
+    dispatch(attachmentsSearch(query));
+  }, [dispatch, id]);
 
   return (
     <Card className="mt-8">
@@ -87,3 +104,4 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   );
 };
 export default GarageTruck;
+

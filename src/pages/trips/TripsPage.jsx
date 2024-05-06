@@ -9,6 +9,7 @@ import {
 } from "../../services/store/slices/tripsSlice";
 import Spinner from "../../components/spinner/Spinner";
 import { PlusIcon } from "@heroicons/react/24/solid";
+import { set } from "date-fns";
 
 const TripsPage = () => {
   const [tripsData, setTripsData] = useState([]);
@@ -18,6 +19,7 @@ const TripsPage = () => {
     (state) => state.trips?.getAll
   );
   const tripsSearchData = useSelector((state) => state.trips?.search);
+  const [planifiedTrips, setPlanifiedTrips] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,13 +28,20 @@ const TripsPage = () => {
 
   useEffect(() => {
     if (data?.trips) {
-      setTripsData(data?.trips);
+      const sortedTrips = [...data.trips].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      console.log(sortedTrips); // This will show the sorted array
+      setTripsData(sortedTrips);
+      setPlanifiedTrips(data?.trips.length);
     }
   }, [data]);
 
   useEffect(() => {
     if (tripsSearchData?.data) {
-      setTripsData(tripsSearchData?.data?.trips);
+      const trips = tripsSearchData?.data?.trips.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setTripsData(trips);
+      setPlanifiedTrips(tripsSearchData?.trips?.length);
     }
   }, [tripsSearchData]);
 
@@ -84,9 +93,9 @@ const TripsPage = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
@@ -112,7 +121,7 @@ const TripsPage = () => {
         <Spinner />
       ) : (
         <>
-          <MenuTrajet />
+          <MenuTrajet planifiedTrips={planifiedTrips}/>
           {tripsData &&
             tripsData.map(
               ({

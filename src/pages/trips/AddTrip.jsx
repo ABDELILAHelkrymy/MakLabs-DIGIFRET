@@ -155,14 +155,14 @@ const AddTrip = () => {
   const handleClick = async () => {
     const { address, phone, email, name } = adress;
 
-    if (address && phone && email && name) {
+    if (address) {
       await dispatch(locationsCreate({ name, address, phone, email }));
     }
 
     setTimeout(() => {
       const steps = ["/add-trip/?step=step2", "/add-trip/?step=step3"];
       if (activeStep === 0 || activeStep === 1) {
-        if ((address && phone && email && name) || originId || destinationId) {
+        if ((address) || originId || destinationId) {
           navigate(steps[activeStep]);
         }
       }
@@ -254,6 +254,25 @@ const AddTrip = () => {
                 </AccordionHeader>
                 <AccordionBody>
                   <div className="list-element p-5">
+                  <div className="pt-5 pb-5">
+                      <p className="font-bold">Trouver votre adresse</p>
+                      <AutocompleteInput
+                        ref={inputRef}
+                        address={adress.address}
+                        setAddress={(e) => {
+                          setAdress({
+                            ...adress,
+                            address: e,
+                          });
+                        }}
+                      />
+                      {/* <Input
+                        name="address"
+                        label="Adresse"
+                        value={adress.address}
+                        onChange={handleChange}
+                      /> */}
+                    </div>
                     <div className="pt-5 pb-5">
                       <Input
                         name="name"
@@ -278,24 +297,7 @@ const AddTrip = () => {
                         onChange={handleChange}
                       />
                     </div>
-                    <div className="pt-5 pb-5">
-                      <AutocompleteInput
-                        ref={inputRef}
-                        address={adress.address}
-                        setAddress={(e) => {
-                          setAdress({
-                            ...adress,
-                            address: e,
-                          });
-                        }}
-                      />
-                      {/* <Input
-                        name="address"
-                        label="Adresse"
-                        value={adress.address}
-                        onChange={handleChange}
-                      /> */}
-                    </div>
+
                   </div>
                 </AccordionBody>
               </Accordion>
