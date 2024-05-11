@@ -19,11 +19,20 @@ import {
   Option,
 } from "@material-tailwind/react";
 import CalendarElement from "../../components/CalendarElement";
+import {
+  attachmentsCreate,
+  clearAttachment,
+} from "../../services/store/slices/attachmentsSlice";
 
 const TruckNew = () => {
+  const [uploaded, setUploaded] = useState(false); // Add uploaded state
   const { data, isLoading, error } = useSelector(
     (state) => state.trucks?.create
   );
+  const attachementsCreateData = useSelector(
+    (state) => state.attachments?.create
+  );
+  const [file, setFile] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -58,10 +67,10 @@ const TruckNew = () => {
     brand: "Marque",
     type: "Type",
     specific: "Genre",
-    nChassis: "N du Chdssis",
+    nChassis: "N du Chassis",
     fuel: "Carburant",
     nCylinders: "Nombre de Cylindres",
-    fiscalPower: "Puiss,nce Fiscale",
+    fiscalPower: "Puissance Fiscale",
     ptc: "PTC",
     pav: "PAV",
     pmtct: "PMTCT",
@@ -84,17 +93,46 @@ const TruckNew = () => {
   };
 
   useEffect(() => {
+    if (attachementsCreateData?.data) {
+      dispatch(clearAttachment());
+    }
+  }, []);
+
+  useEffect(() => {
     if (data) {
-      toast.success("Truck created successfully");
-      navigate("/garage");
+      handleUpload(data.truck._id, data.truck.brand);
+      // toast.success("Truck created successfully");
+      // navigate("/garage");
     }
     if (error) {
       toast.error("An error occured");
     }
   }, [data, error]);
 
-  const handleSelectChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e });
+  useEffect(() => {
+    if (attachementsCreateData) {
+      if (attachementsCreateData.data) {
+        toast.success("Truck created successfully");
+        navigate("/garage");
+      }
+    }
+  }, [attachementsCreateData]);
+
+  const handleFileChange = (event) => {
+    console.log(event.target.files[0]);
+    setFile(event.target.files[0]);
+    setUploaded(true); // Set uploaded state to true
+  };
+
+  const handleUpload = async (id, name) => {
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("entity", id);
+    formData.append("entityName", "trucks");
+    formData.append("name", name);
+    formData.append("type", "truck-logo");
+    formData.append("file", file);
+    dispatch(attachmentsCreate(formData));
   };
 
   return (
@@ -113,9 +151,9 @@ const TruckNew = () => {
           width="25px"
           height="25px"
           fill="#2EAA35"
-          onClick={() => {
-            navigate("/garage");
-          }}
+          // onClick={() => {
+          //   navigate("/garage");
+          // }}
         />
       </div>
       {/* Page Content  */}
@@ -136,7 +174,7 @@ const TruckNew = () => {
                   >
                     <div className="flex flex-col items-center justify-center p-2">
                       <svg
-                        className="w-5 h-5 mb-2 text-gray-500"
+                        className={`w-5 h-5 mb-2 ${uploaded ? "text-green-500" : "text-gray-500"}`} // Change color based on uploaded state
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -144,19 +182,25 @@ const TruckNew = () => {
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
                           d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                         />
                       </svg>
                       <p className="mb-2 text-sm text-gray-500 text-center">
                         <span className="font-semibold">
-                          Cliquez pour télécharger
-                        </span>
+                          {uploaded ? file.name : "Cliquez pour télécharger"}
+                        </span>{" "}
+                        {/* Display file name if uploaded */}
                       </p>
                     </div>
-                    <input id="dropzone-file" type="file" className="hidden" />
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      className="hidden"
+                      onChange={handleFileChange}
+                    />
                   </label>
                 </div>
               </div>
@@ -176,7 +220,6 @@ const TruckNew = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, purchaseType: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Credit">Credit</Option>
@@ -197,7 +240,6 @@ const TruckNew = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, specific: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Tracteur">Tracteur</Option>
@@ -220,7 +262,6 @@ const TruckNew = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, fuel: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Diesel">Diesel</Option>
@@ -249,14 +290,12 @@ const TruckNew = () => {
                     key !== "dateOfCirculation" && (
                       <div className="flex items-center justify-between mb-5">
                         <Input
-                          variant="outline"
                           key={key}
                           id={key}
                           name={key}
                           value={formData[key]}
                           label={InputFrNames[key]}
                           onChange={handleChange}
-                          fullWidth
                           className="w-1/2"
                         />
                       </div>
@@ -266,8 +305,7 @@ const TruckNew = () => {
             </div>
             <Button
               type="submit"
-              fullWidth
-              className="mt-3 flex justify-center items-center gap-3 bg-purple-400"
+              className="mt-3 flex justify-center items-center gap-3 bg-purple-400 w-full"
             >
               <PlusCircleIcon height="25px" width="25px" className="" />
               Confirmer l'ajout

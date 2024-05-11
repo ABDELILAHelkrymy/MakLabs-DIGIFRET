@@ -9,7 +9,6 @@ import {
   trucksSearch,
 } from "../../services/store/slices/trucksSlice";
 import Spinner from "../../components/spinner/Spinner";
-import { set } from "date-fns";
 
 const GarageMain = () => {
   const [searchInput, setSearchInput] = useState("");

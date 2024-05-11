@@ -1,7 +1,7 @@
 import React from "react";
 import { SidebarWithBurgerMenu } from "../sideBar/Sidebar";
 import { PhoneIcon, BellIcon } from "@heroicons/react/24/outline";
-import { MobileNav, Navbar, Typography } from "@material-tailwind/react";
+import { Collapse, Navbar, Typography } from "@material-tailwind/react";
 import NotificationTrajet from "../../pages/trips/NotificationTrajet";
 import { useSelector } from "react-redux";
 
@@ -48,9 +48,9 @@ const Header = () => {
           {navList}
         </div>
       </Navbar>
-      <MobileNav open={isNavOpen} className="z-10 top-10 fixed">
+      <Collapse open={isNavOpen} className="z-10 top-10 fixed">
         <NavList />
-      </MobileNav>
+      </Collapse>
     </>
   );
 };

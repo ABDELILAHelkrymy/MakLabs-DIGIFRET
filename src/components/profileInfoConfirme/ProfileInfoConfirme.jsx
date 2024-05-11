@@ -3,6 +3,7 @@ import { Button, Input, Typography } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editAuthData } from "../../services/app/auth/authSlice";
+import { toast } from "react-toastify";
 
 const ProfileInfoConfirme = () => {
   const [loading, setLoading] = useState(false);
@@ -25,16 +26,20 @@ const ProfileInfoConfirme = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(
-      editAuthData({
-        ...EditedAuthData,
-        fullname,
-        phone,
-        email,
-      })
-    );
-    setLoading(true);
-    navigate("/sign-up/step3");
+    if (!fullname || !phone) {
+      toast.error("Veuillez remplir tous les champs");
+    } else {
+      dispatch(
+        editAuthData({
+          ...EditedAuthData,
+          fullname,
+          phone,
+          email,
+        })
+      );
+      setLoading(true);
+      navigate("/sign-up/step3");
+    }
   };
   return (
     <>
@@ -48,7 +53,7 @@ const ProfileInfoConfirme = () => {
       >
         <div className="mb-1 flex flex-col gap-6">
           <Typography variant="h6" color="blue-gray" className="-mb-3">
-            Nom complet
+            Nom complet <span className="text-red-500">*</span>
           </Typography>
           <Input
             size="lg"
@@ -60,10 +65,9 @@ const ProfileInfoConfirme = () => {
             name="fullname"
             value={fullname}
             onChange={(e) => onChange(e)}
-            required
           />
           <Typography variant="h6" color="blue-gray" className="-mb-3">
-            Téléphone
+            Téléphone <span className="text-red-500">*</span>
           </Typography>
           <Input
             size="lg"
@@ -75,7 +79,6 @@ const ProfileInfoConfirme = () => {
             name="phone"
             value={phone}
             onChange={(e) => onChange(e)}
-            required
           />
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Adresse e-mail
@@ -90,7 +93,6 @@ const ProfileInfoConfirme = () => {
             name="email"
             value={email}
             onChange={(e) => onChange(e)}
-            required
             disabled={email ? true : false}
           />
         </div>
@@ -103,3 +105,4 @@ const ProfileInfoConfirme = () => {
 };
 
 export default ProfileInfoConfirme;
+

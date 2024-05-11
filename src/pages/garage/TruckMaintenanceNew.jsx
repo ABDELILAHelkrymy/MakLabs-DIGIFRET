@@ -19,7 +19,6 @@ import {
 } from "@heroicons/react/24/solid";
 import { Card, CardBody, Button, Input } from "@material-tailwind/react";
 import CalendarElement from "../../components/CalendarElement";
-import Upload from "../../components/upload/Upload";
 import toast, { Toaster } from "react-hot-toast";
 
 const TruckMaintenanceNew = () => {
@@ -190,4 +189,3 @@ const TruckMaintenanceNew = () => {
   );
 };
 export default TruckMaintenanceNew;
-
