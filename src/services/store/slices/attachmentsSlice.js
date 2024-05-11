@@ -22,6 +22,9 @@ const attachmentsSlice = createSlice({
   reducers: {
     clearAttachment: (state) => {
       state.create.data = null;
+      state.update.data = null;
+      state.remove.data = null;
+      state.search.data = null;
     },
   },
   extraReducers: (builder) => {
