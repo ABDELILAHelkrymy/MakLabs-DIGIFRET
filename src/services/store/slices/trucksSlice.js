@@ -34,3 +34,4 @@ export const {
 } = generateExportedActions("trucks", trucksApiActions);
 
 export default trucksSlice.reducer;
+
