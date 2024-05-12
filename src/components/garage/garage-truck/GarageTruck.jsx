@@ -26,7 +26,6 @@ import {
 } from "@material-tailwind/react";
 import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 import { donwloadLogo } from "../../../utils/download";
-import { set } from "date-fns";
 
 const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   const navigate = useNavigate();
@@ -68,18 +67,14 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
 
   useEffect(() => {
     if (attachmentsData?.data?.attachments) {
-      // get the files and put them in the right place
-      const logos = attachmentsData?.data?.attachments.map(
-        (attachment) => attachment
-      );
-      console.log("logos", logos);
-      Promise.all(logos.map((logo) => donwloadLogo(logo))).then((urls) => {
-        setLogo(urls[0]); // Assuming you want to set the first logo, you can modify this logic as needed
-      });
-
-      dispatch(clearAttachment());
+      const logos = attachmentsData?.data?.attachments["0"];
+      if (logos) {
+        donwloadLogo(logos).then((res) => {
+          setLogo(res);
+        });
+      }
     }
-  }, [attachmentsData?.data?.attachments, dispatch, id]);
+  }, [attachmentsData?.data?.attachments, id]);
 
   return (
     <Card className="mt-8">
@@ -91,7 +86,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
       <CardBody>
         <div className="garage flex justify-between text-xs">
           <div className="garage-content w-1/2 ">
-            <img src={logo} alt="" />
+            <img width="100px" height="100px" src={logo} alt="" />
           </div>
           <div className="actions flex flex-col justify-between w-1/2 items-end ">
             <div className="etat-trajet">
