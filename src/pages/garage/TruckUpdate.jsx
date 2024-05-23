@@ -23,6 +23,12 @@ import {
 import Spinner from "../../components/spinner/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 import CalendarElement from "../../components/CalendarElement";
+import {
+  attachmentsSearch,
+  clearAttachment,
+  attachmentsUpdate,
+} from "../../services/store/slices/attachmentsSlice";
+import { donwloadLogo } from "../../utils/download";
 
 const TruckUpdate = () => {
   const dispatch = useDispatch();
@@ -31,6 +37,10 @@ const TruckUpdate = () => {
   const id = params.get("id");
   const { data } = useSelector((state) => state.trucks?.getById);
   const updatedState = useSelector((state) => state.trucks?.update);
+  const attachmentsData = useSelector((state) => state.attachments?.search);
+  const [logo, setLogo] = useState(null);
+  const [uploaded, setUploaded] = useState(false); // Add uploaded state
+  const [file, setFile] = useState("");
   const [formData, setFormData] = useState({
     seller: "",
     buyer: "",
@@ -105,7 +115,60 @@ const TruckUpdate = () => {
     }
   }, [updatedState.error, updatedState.data]);
 
-  if (updatedState.isLoading) {
+  useEffect(() => {
+    const query = [
+      {
+        field: "entity",
+        value: id,
+      },
+      {
+        field: "type",
+        value: "truck-logo",
+      },
+    ];
+    dispatch(attachmentsSearch(query));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (attachmentsData?.data?.attachments) {
+      const logos = attachmentsData?.data?.attachments["0"];
+      if (logos) {
+        donwloadLogo(logos).then((res) => {
+          setLogo(res);
+          clearAttachment();
+        });
+      }
+    }
+  }, [attachmentsData?.data?.attachments, id]);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+    setUploaded(true); // Set uploaded state to true
+  };
+
+  const handleUpload = async (id, name) => {
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("entity", id);
+    formData.append("entityName", "trucks");
+    formData.append("name", name);
+    formData.append("type", "truck-logo");
+    formData.append("file", file);
+    dispatch(
+      attachmentsUpdate({
+        id: attachmentsData?.data?.attachments["0"]._id,
+        data: formData,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (uploaded && updatedState.data) {
+      handleUpload(id, file.name);
+    }
+  }, [file.name, id, updatedState.data, uploaded]);
+
+  if (updatedState.isLoading || attachmentsData.isLoading || !data) {
     return <Spinner />;
   }
 
@@ -152,7 +215,7 @@ const TruckUpdate = () => {
                   >
                     <div className="flex flex-col items-center justify-center p-2">
                       <svg
-                        className="w-5 h-5 mb-2 text-gray-500"
+                        className={`w-5 h-5 mb-2  ${attachmentsData?.data?.attachments || uploaded ? "text-green-500" : "text-gray-500"}`}
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -168,11 +231,20 @@ const TruckUpdate = () => {
                       </svg>
                       <p className="mb-2 text-sm text-gray-500 text-center">
                         <span className="font-semibold">
-                          Cliquez pour télécharger
+                          {attachmentsData?.data?.attachments
+                            ? "Logo téléchargé"
+                            : uploaded
+                              ? file.name
+                              : "Cliquez pour télécharger"}
                         </span>
                       </p>
                     </div>
-                    <input id="dropzone-file" type="file" className="hidden" />
+                    <input
+                      id="dropzone-file"
+                      type="file"
+                      className="hidden"
+                      onChange={handleFileChange}
+                    />
                   </label>
                 </div>
               </div>
@@ -192,7 +264,6 @@ const TruckUpdate = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, purchaseType: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Credit">Credit</Option>
@@ -213,7 +284,6 @@ const TruckUpdate = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, specific: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Tracteur">Tracteur</Option>
@@ -236,7 +306,6 @@ const TruckUpdate = () => {
                         onChange={(e) => {
                           setFormData({ ...formData, fuel: e });
                         }}
-                        fullWidth
                         className="w-1/2"
                       >
                         <Option value="Diesel">Diesel</Option>
@@ -265,14 +334,12 @@ const TruckUpdate = () => {
                     key !== "dateOfCirculation" && (
                       <div className="flex items-center justify-between mb-5">
                         <Input
-                          variant="outline"
                           key={key}
                           id={key}
                           name={key}
                           value={formData[key]}
                           label={InputFrNames[key]}
                           onChange={handleChange}
-                          fullWidth
                           className="w-1/2"
                         />
                       </div>
@@ -280,10 +347,10 @@ const TruckUpdate = () => {
                 </>
               ))}
             </div>
+
             <Button
               type="submit"
-              fullWidth
-              className="mt-3 flex justify-center items-center gap-3 bg-purple-400"
+              className="w-full mt-3 flex justify-center items-center gap-3 bg-purple-400"
             >
               <PlusCircleIcon height="25px" width="25px" className="" />
               Confirmer
