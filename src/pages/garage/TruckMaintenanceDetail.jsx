@@ -60,6 +60,9 @@ const TruckMaintenanceDetail = () => {
           width="25px"
           height="25px"
           fill="#2eaa35"
+          onClick={() => {
+            navigate(`/modifier-tache-entretien/${id}`);
+          }}
         />
       </div>
       {/* Page Content  */}

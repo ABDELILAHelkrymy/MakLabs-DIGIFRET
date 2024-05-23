@@ -25,6 +25,7 @@ import TruckTrips from "../pages/garage/TruckTrips";
 import CarbonBalance from "../pages/garage/CarbonBalance";
 import TruckMaintenanceDetail from "../pages/garage/TruckMaintenanceDetail";
 import TruckMaintenanceNew from "../pages/garage/TruckMaintenanceNew";
+import TruckMaintenanceUpdate from "../pages/garage/TruckMaintenanceUpdate";
 import TruckNew from "../pages/garage/TruckNew";
 import TruckUpdate from "../pages/garage/TruckUpdate";
 // trips routes
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "nouvelle-tache-entretien/:id",
         element: <TruckMaintenanceNew />,
+      },
+      {
+        path: "modifier-tache-entretien/:id",
+        element: <TruckMaintenanceUpdate />,
       },
       { path: "nouveau-camion", element: <TruckNew /> },
       { path: "pilotage-trajet", element: <PilotageTrajet /> },
