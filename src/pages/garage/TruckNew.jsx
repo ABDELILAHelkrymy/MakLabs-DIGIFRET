@@ -119,7 +119,6 @@ const TruckNew = () => {
   }, [attachementsCreateData]);
 
   const handleFileChange = (event) => {
-    console.log(event.target.files[0]);
     setFile(event.target.files[0]);
     setUploaded(true); // Set uploaded state to true
   };

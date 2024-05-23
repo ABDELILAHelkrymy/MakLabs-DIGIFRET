@@ -71,6 +71,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
       if (logos) {
         donwloadLogo(logos).then((res) => {
           setLogo(res);
+          clearAttachment();
         });
       }
     }
