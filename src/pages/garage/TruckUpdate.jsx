@@ -26,7 +26,7 @@ import CalendarElement from "../../components/CalendarElement";
 import {
   attachmentsSearch,
   clearAttachment,
-  attachmentsUpdate,
+  attachmentsCreate,
 } from "../../services/store/slices/attachmentsSlice";
 import { donwloadLogo } from "../../utils/download";
 
@@ -154,12 +154,7 @@ const TruckUpdate = () => {
     formData.append("name", name);
     formData.append("type", "truck-logo");
     formData.append("file", file);
-    dispatch(
-      attachmentsUpdate({
-        id: attachmentsData?.data?.attachments["0"]._id,
-        data: formData,
-      })
-    );
+    dispatch(attachmentsCreate(formData));
   };
 
   useEffect(() => {

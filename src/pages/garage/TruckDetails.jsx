@@ -18,10 +18,14 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { trucksGetById } from "../../services/store/slices/trucksSlice";
-import { attachmentsSearch } from "../../services/store/slices/attachmentsSlice";
+import {
+  attachmentsSearch,
+  getTruckImage,
+} from "../../services/store/slices/attachmentsSlice";
 import { donwloadLogo } from "../../utils/download";
 
 import IvecoImg from "../../assets/img/garage/iveco.jpg";
+import Spinner from "../../components/spinner/Spinner";
 const TruckDetails = () => {
   const [truckData, setTruckData] = useState({
     brand: "",
@@ -35,7 +39,7 @@ const TruckDetails = () => {
   const trucksGetByIdState = useSelector((state) => state.trucks.getById);
   const { id } = useParams();
 
-  const attachmentsData = useSelector((state) => state.attachments?.search);
+  const truckImages = useSelector((state) => state.attachments?.truckImages);
   const [logo, setLogo] = useState(null);
 
   useEffect(() => {
@@ -43,29 +47,19 @@ const TruckDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    const query = [
-      {
-        field: "entity",
-        value: id,
-      },
-      {
-        field: "type",
-        value: "truck-logo",
-      },
-    ];
-    dispatch(attachmentsSearch(query));
+    dispatch(getTruckImage(id));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (attachmentsData?.data?.attachments) {
-      const logos = attachmentsData?.data?.attachments["0"];
+    if (truckImages && truckImages[id]) {
+      const logos = truckImages[id];
       if (logos) {
         donwloadLogo(logos).then((res) => {
           setLogo(res);
         });
       }
     }
-  }, [attachmentsData?.data?.attachments, id]);
+  }, [truckImages, id]);
 
   // get the year based on date like that "2018-01-02T00:00:00.000Z"
   const getYear = (date) => {
@@ -86,6 +80,10 @@ const TruckDetails = () => {
       });
     }
   }, [trucksGetByIdState]);
+
+  if (trucksGetByIdState.isLoading) {
+    return <Spinner />;
+  }
   return (
     <div>
       {/* Page Header */}
@@ -117,7 +115,7 @@ const TruckDetails = () => {
         <CardBody>
           <div className="garage flex justify-between text-xs">
             <div className="garage-content w-1/2 p-2">
-              <img src={logo} width="100px" height="100px" alt="" />
+              <img src={logo ?? IvecoImg} width="100px" height="100px" alt="" />
             </div>
             <div className="flex w-1/2 flex-col justify-around p-2">
               <div className="flex flex-col items-start">

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  attachmentsSearch,
+  getTruckImage,
   clearAttachment,
 } from "../../../services/store/slices/attachmentsSlice";
 import {
@@ -26,11 +26,12 @@ import {
 } from "@material-tailwind/react";
 import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 import { donwloadLogo } from "../../../utils/download";
+import Sppinner from "../../spinner/Spinner";
 
 const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const attachmentsData = useSelector((state) => state.attachments?.search);
+  const truckImages = useSelector((state) => state.attachments?.truckImages);
   const [logo, setLogo] = useState(null);
 
   // get the year based on date like that "2018-01-02T00:00:00.000Z"
@@ -52,22 +53,12 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   };
 
   useEffect(() => {
-    const query = [
-      {
-        field: "entity",
-        value: id,
-      },
-      {
-        field: "type",
-        value: "truck-logo",
-      },
-    ];
-    dispatch(attachmentsSearch(query));
+    dispatch(getTruckImage({ id }));
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (attachmentsData?.data?.attachments) {
-      const logos = attachmentsData?.data?.attachments["0"];
+    if (truckImages && truckImages[id]) {
+      const logos = truckImages[id];
       if (logos) {
         donwloadLogo(logos).then((res) => {
           setLogo(res);
@@ -75,7 +66,11 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
         });
       }
     }
-  }, [attachmentsData?.data?.attachments, id]);
+  }, [id, truckImages]);
+
+  if (truckImages.isLoading) {
+    return <Sppinner />;
+  }
 
   return (
     <Card className="mt-8">
@@ -87,7 +82,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
       <CardBody>
         <div className="garage flex justify-between text-xs">
           <div className="garage-content w-1/2 ">
-            <img width="100px" height="100px" src={logo} alt="" />
+            <img width="100px" height="100px" src={logo ?? IvecoImg} alt="" />
           </div>
           <div className="actions flex flex-col justify-between w-1/2 items-end ">
             <div className="etat-trajet">
