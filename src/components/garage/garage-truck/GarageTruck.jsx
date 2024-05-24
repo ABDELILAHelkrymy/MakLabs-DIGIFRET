@@ -26,6 +26,7 @@ import {
 } from "@material-tailwind/react";
 import IvecoImg from "../../../assets/img/garage/iveco.jpg";
 import { donwloadLogo } from "../../../utils/download";
+import Sppinner from "../../spinner/Spinner";
 
 const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (truckImages[id]) {
+    if (truckImages && truckImages[id]) {
       const logos = truckImages[id];
       if (logos) {
         donwloadLogo(logos).then((res) => {
@@ -65,7 +66,11 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
         });
       }
     }
-  }, [truckImages, id]);
+  }, [id, truckImages]);
+
+  if (truckImages.isLoading) {
+    return <Sppinner />;
+  }
 
   return (
     <Card className="mt-8">
@@ -77,7 +82,7 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
       <CardBody>
         <div className="garage flex justify-between text-xs">
           <div className="garage-content w-1/2 ">
-            <img width="100px" height="100px" src={logo} alt="" />
+            <img width="100px" height="100px" src={logo ?? IvecoImg} alt="" />
           </div>
           <div className="actions flex flex-col justify-between w-1/2 items-end ">
             <div className="etat-trajet">
@@ -112,3 +117,4 @@ const GarageTruck = ({ id, status, brand, dateCirculation, nRegistration }) => {
   );
 };
 export default GarageTruck;
+

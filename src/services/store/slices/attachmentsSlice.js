@@ -26,7 +26,7 @@ export const getTruckImage = createAsyncThunk(
       },
     ];
     const attachmentRes = await attachmentsFetcher.search(query);
-    console.log("attachment", attachmentRes.data.attachments);
+    return attachmentRes?.data?.attachments[0];
   }
 );
 
@@ -34,6 +34,7 @@ const apiInitialState = getDefaultInitialState();
 
 const initialState = {
   ...apiInitialState,
+  truckImages: {},
 };
 
 const attachmentsApiActions = generateApiActions("attachments");
@@ -52,23 +53,23 @@ const attachmentsSlice = createSlice({
   extraReducers: (builder) => {
     addReducerApiCases(builder, attachmentsApiActions);
     builder.addCase(getTruckImage.fulfilled, (state, action) => {
-      state.getTruckImage.isLoading = false;
-      const truckId = action.payload.data.attachments[0].entity;
+      state.truckImages.isLoading = false;
+      const truckId = action.payload.entity._id;
       if (truckId) {
         if (state.truckImages) {
-          state.truckImages[truckId] = action.payload.data.attachments[0];
+          state.truckImages[truckId] = action.payload;
         } else {
-          state.truckImages = { [truckId]: action.payload.data.attachments[0] };
+          state.truckImages = { [truckId]: action.payload };
         }
       }
     });
     builder.addCase(getTruckImage.pending, (state) => {
-        state.getTruckImage.isLoading = true;
-        state.getTruckImage.error = null;
+      state.truckImages.isLoading = true;
+      state.truckImages.error = null;
     });
     builder.addCase(getTruckImage.rejected, (state, action) => {
-      state.getTruckImage.isLoading = false;
-      state.getTruckImage.error = action.error.message;
+      state.truckImages.isLoading = false;
+      state.truckImages.error = action.error.message;
     });
   },
 });
@@ -85,3 +86,4 @@ export const {
 export const { clearAttachment } = attachmentsSlice.actions;
 
 export default attachmentsSlice.reducer;
+
