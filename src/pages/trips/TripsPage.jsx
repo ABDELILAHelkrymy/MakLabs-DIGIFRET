@@ -35,15 +35,15 @@ const TripsPage = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (tripsSearchData?.data) {
-      const trips = tripsSearchData?.data?.trips.sort((a, b) => {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      });
-      setTripsData(trips);
-      setPlanifiedTrips(tripsSearchData?.trips?.length);
-    }
-  }, [tripsSearchData]);
+  // useEffect(() => {
+  //   if (tripsSearchData?.data) {
+  //     const trips = tripsSearchData?.data?.trips?.sort((a, b) => {
+  //       return new Date(b.createdAt) - new Date(a.createdAt);
+  //     });
+  //     setTripsData(trips);
+  //     setPlanifiedTrips(tripsSearchData?.trips?.length);
+  //   }
+  // }, [tripsSearchData]);
 
   const handleSearch = (e) => {
     e.preventDefault();
