@@ -7,7 +7,7 @@ Here's how to install and set up the project:
 * in .env.production file add :
   
   The backend url : 
-  REACT_APP_BACKEND_URL = "https://back-template-smdev.onrender.com"
+  REACT_APP_BACKEND_URL = "https://digifret-api-dev.onrender.com"
   
   The web site url to use it as redirect url for google and facebook auth : 
   REACT_APP_REDIRECT_URI = "https://mak-labs-digifrit.vercel.app"
