@@ -53,24 +53,27 @@ const TruckMaintenanceNew = () => {
   });
 
   useEffect(() => {
+    // Set form data with maintenance details if present
     if (getMaintenance?.data?.maintenance) {
       setFormData(getMaintenance?.data?.maintenance);
-      console.log(getMaintenance?.data?.maintenance);
     }
   }, [getMaintenance]);
-
-  useEffect(() => {
-    dispatch(clearMaintenance());
-    dispatch(usersGetAll());
-    dispatch(maintenanceTypesGetAll());
-  }, []);
   const attachments = useSelector((state) => state.attachments?.search);
 
   useEffect(() => {
+    // Fetch the maintenance data when the component loads
     dispatch(maintenancesGetById(id));
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
+    // Fetch all users and maintenance types only once when the component mounts
+    dispatch(usersGetAll());
+    dispatch(maintenanceTypesGetAll());
+    dispatch(clearMaintenance());
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Fetch attachments related to the maintenance
     const query = [
       {
         field: "entity",
@@ -81,13 +84,14 @@ const TruckMaintenanceNew = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
+    // Set attachments data if present
     if (attachments?.data?.attachments) {
       setFormData({
         ...formData,
         documents: attachments?.data?.attachments,
       });
     }
-  }, [attachments]);
+  }, [attachments, formData]);
 
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
@@ -95,7 +99,7 @@ const TruckMaintenanceNew = () => {
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    setUploaded(true); // Set uploaded state to true
+    setUploaded(false); // Reset uploaded state to ensure new uploads trigger
   };
 
   useEffect(() => {
@@ -130,16 +134,17 @@ const TruckMaintenanceNew = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(maintenancesUpdate({ id, data: formData }));
+    dispatch(maintenancesUpdate({ id, data: formData })); // First update the form data
   };
 
-  useEffect(() => {
-    if (data || attachmentCreate?.data) {
-      if (file || attachments?.data?.attachments) {
-        handleUpload(id, name);
-      }
-    }
-  }, [data, error, attachmentCreate]);
+  // Separate effect for handling file upload after form update
+useEffect(() => {
+  // Only upload if there is a valid file and the form data has been updated
+  if (data && file && !uploaded) {
+    handleUpload(id, name); // Perform the upload
+    setUploaded(true); // Prevent repeated uploads
+  }
+}, [data, file, uploaded, id, name]); // Only trigger this effect when `data`, `file`, or `uploaded` changes
 
   return (
     <>
